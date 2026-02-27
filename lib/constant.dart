@@ -12,6 +12,8 @@ const Color kSecondaryColor = Color(0xFF425C9E);
 const Color kBackgroundColor = Color(0xFFF4F7F9);
 // Text or Icon Grey Color:
 const Color kGreyColor = Color(0xFF6C7072);
+// White color with 20% opacity (Used for icon backgrounds on dark cards)
+const Color kWhiteOpacity20 = Color(0x33FFFFFF);
 
 // --- Decorations (Borders & Shadows) ---
 abstract class AppDecorations {

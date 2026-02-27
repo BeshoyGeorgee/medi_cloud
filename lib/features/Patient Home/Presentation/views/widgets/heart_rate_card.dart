@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:medi_cloud_app/Core/utils/textStyles.dart';
+import 'package:medi_cloud_app/constant.dart';
 
 class HeartRateCard extends StatelessWidget {
   const HeartRateCard({super.key});
@@ -9,69 +11,100 @@ class HeartRateCard extends StatelessWidget {
       width: double.infinity,
       height: 180,
       decoration: BoxDecoration(
-        // Apply linear gradient from dark teal to a lighter shade
+        // Apply the primary gradient background
         gradient: const LinearGradient(
-          colors: [Color(0xFF1E3A34), Color(0xFF3DA991)],
+          colors: [kPrimaryColor, kShadePrimaryColor],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(25),
+        // Apply the unified border radius from the design system
+        borderRadius: AppDecorations.borderRadius25,
       ),
       child: Stack(
         children: [
-          // Background decoration: Faint heart rate icon positioned at the bottom right
+          // Background decorative icon (Heart rate wave)
           Positioned(
-            right: 20,
+            top: 24,
+            right: 24,
             bottom: 20,
-            child: Icon(
-              Icons.show_chart, 
-              size: 120,
-              color: Colors.white.withOpacity(0.2),
-            ),
+            child: Icon(Icons.show_chart, size: 140, color: kWhiteOpacity20),
           ),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(22.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Top section: Last update info and 'More details' button
+                // --- Top Section: Last Update & Arrow ---
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // FIX: This line pushes the arrow up to align with the top text
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Last update', style: TextStyle(color: Colors.white70, fontSize: 12)),
-                        Text('41 min ago', style: TextStyle(color: Colors.white, fontSize: 14)),
+                        Text(
+                          'Last update',
+                          style: Styles.textStyle12.copyWith(
+                            color: Colors.white70,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ), // Spacing between the two texts
+                        Text(
+                          '41 min ago',
+                          style: Styles.textStyle14.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ],
                     ),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: const Text('More details', style: TextStyle(color: Colors.white)),
-                      label: const Icon(Icons.arrow_forward, color: Colors.white, size: 16),
+                    // Navigation Arrow Buttonل
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      // Added 'const' and used the unified constant color for better performance
+                      decoration: const BoxDecoration(
+                        color: kWhiteOpacity20,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                        size: 14,
+                      ),
                     ),
                   ],
                 ),
-                const Spacer(),
-                // Bottom section: Heart rate value (BPM) and status
-                const Text('Heart Rate', style: TextStyle(color: Colors.white70, fontSize: 16)),
-                const Row(
+
+                const Spacer(flex: 3),
+
+                // --- Bottom Section: Heart Rate Value & Status ---
+                Text(
+                  'Heart Rate',
+                  style: Styles.textStyle16.copyWith(color: Colors.white70),
+                ),
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.alphabetic,
                   children: [
                     Text(
                       '65',
-                      style: TextStyle(color: Colors.white, fontSize: 45, fontWeight: FontWeight.bold),
+                      style: Styles.textStyle45Bold.copyWith(
+                        color: Colors.white,
+                        height: 0.9,
+                      ),
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 8),
                     Text(
                       'bpm',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: Styles.textStyle20.copyWith(color: Colors.white),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
                       'Normal',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: Styles.textStyle18.copyWith(color: Colors.white),
                     ),
                   ],
                 ),
