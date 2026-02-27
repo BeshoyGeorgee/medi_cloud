@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:medi_cloud_app/Core/utils/textStyles.dart';
+import 'package:medi_cloud_app/Core/utils/widgets/custom_button.dart';
 import 'package:medi_cloud_app/constant.dart';
 
 class ConnectWerableDevice extends StatelessWidget {
@@ -11,84 +13,55 @@ class ConnectWerableDevice extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
-        // Subtle shadow to elevate the card from the background
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 15,
-            offset: const Offset(0, 5),
-          ),
-        ],
+        borderRadius: AppDecorations.borderRadius25, // استخدام البوردر الموحد
+        boxShadow: [AppDecorations.defaultShadow], // استخدام الشادو الموحد
       ),
       child: Column(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Information Section
               Expanded(
                 flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Connect to\nApple Health',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1E3A34), 
+                    Text(
+                      'Connect to\nWerable Device',
+                      style: Styles.textStyle22Bold.copyWith(
+                        color: kShadePrimaryColor,
                         height: 1.2,
                       ),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       'Sync all health data in one Place. Apple Watch and Powerbeats Pro 2 supported',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.teal.shade300,
+                      style: Styles.textStyle14.copyWith(
+                        color: kLightPrimaryColor,
                         height: 1.4,
                       ),
                     ),
                   ],
                 ),
               ),
-              // Wearable Device Image Section
               Expanded(
                 flex: 1,
                 child: Image.network(
-                  'https://ouch-cdn2.icons8.com/mO_p9-8y9E-kYq1Xz1Xz1Xz1Xz1Xz1Xz1Xz1Xz1Xz1Xz.png', 
+                  'https://ouch-cdn2.icons8.com/mO_p9-8y9E-kYq1Xz1Xz1Xz1Xz1Xz1Xz1Xz1Xz1Xz1Xz.png',
                   height: 100,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 20),
-          // Action Button
-          SizedBox(
-            width: double.infinity,
-            height: 55,
-            child: ElevatedButton(
-              onPressed: () {
-                // Future: Integration with health fitness APIs
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kPrimaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                elevation: 0,
-              ),
-              child: const Text(
-                'Connect',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+          const SizedBox(height: 20),
+          // --- Action Button (Using our Reusable CustomButton) ---
+          CustomButton(
+            text: 'Connect',
+            onPressed: () {
+              debugPrint('Connect Button Pressed!');
+            },
           ),
         ],
       ),

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 const Color kPrimaryColor = Color(0xFF2A988F);
 // SHAD of Primary Color
 const Color kShadePrimaryColor = Color(0xFF16504B);
+// The light shade of the primary color
+const Color kLightPrimaryColor = Color(0xFF5FD3C9);
 //Secondary Color:
 const Color kSecondaryColor = Color(0xFF425C9E);
 //Background Color:
