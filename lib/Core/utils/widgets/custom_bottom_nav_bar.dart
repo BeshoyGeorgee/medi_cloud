@@ -22,14 +22,7 @@ class CustomBottomNavBar extends StatelessWidget {
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
         ),
-        boxShadow: [
-          // A very light shadow pointing upwards to separate it from the background
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 15,
-            offset: const Offset(0, -5), 
-          ),
-        ],
+        boxShadow: [AppDecorations.bottomBarShadow],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -40,16 +33,16 @@ class CustomBottomNavBar extends StatelessWidget {
             icon: Icons.home_filled, // Filled icon when selected
             unselectedIcon: Icons.home_outlined, // Outlined when unselected
           ),
-          
+
           // --- Tab 1: Chat ---
           _buildNavItem(
             index: 1,
-            // Using standard icons. If you have SVG files for the exact icons, 
+            // Using standard icons. If you have SVG files for the exact icons,
             // you can replace these with SvgPicture.asset() later
-            icon: Icons.chat_bubble, 
+            icon: Icons.chat_bubble,
             unselectedIcon: Icons.chat_bubble_outline,
           ),
-          
+
           // --- Tab 2: Menu/Dashboard ---
           _buildNavItem(
             index: 2,
@@ -68,11 +61,11 @@ class CustomBottomNavBar extends StatelessWidget {
     required IconData unselectedIcon,
   }) {
     final isSelected = currentIndex == index;
-    
+
     return GestureDetector(
       onTap: () => onTap(index),
       // HitTestBehavior.opaque ensures the whole padding area is clickable, not just the exact icon pixels
-      behavior: HitTestBehavior.opaque, 
+      behavior: HitTestBehavior.opaque,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
         child: Icon(

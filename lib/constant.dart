@@ -30,4 +30,10 @@ abstract class AppDecorations {
     blurRadius: 15,
     offset: Offset(0, 5),
   );
+
+  static const bottomBarShadow = BoxShadow(
+    color: Color(0x0D000000), // نفس لون الـ 5% شفافية الموحد
+    blurRadius: 15,           // نفس درجة النعومة
+    offset: Offset(0, -5),    // السالب هنا عشان الشادو يطلع لفوق فوق البار
+  );
 }
