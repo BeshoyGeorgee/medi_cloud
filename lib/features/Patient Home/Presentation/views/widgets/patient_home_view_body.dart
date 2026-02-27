@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/connect_wearable_device.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/custom_home_appbar.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/heart_rate_card.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/my_doctor_section.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/my_hospital_section.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/recommend_doc_section.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/recommend_hospital_section.dart';
 
@@ -26,6 +28,10 @@ class PatientHomeViewBody extends StatelessWidget {
               RecommendHospitalSection(),
               SizedBox(height: 12),
               RecommendDoctorSection(),
+              SizedBox(height: 12),
+              MyDoctorSection(),
+              SizedBox(height: 12),
+              MyHospitalSection(),
               
             ],
           ),
