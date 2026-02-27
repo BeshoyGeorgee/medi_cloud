@@ -55,7 +55,6 @@ class ConnectWerableDevice extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          const SizedBox(height: 20),
           // --- Action Button (Using our Reusable CustomButton) ---
           CustomButton(
             text: 'Connect',
