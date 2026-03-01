@@ -93,4 +93,10 @@ abstract class Styles {
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
+  
+  // 16- 45, bold (For huge metrics like Heart Rate)
+  static const textStyle45Bold = TextStyle(
+    fontSize: 45,
+    fontWeight: FontWeight.bold,
+  );
 }

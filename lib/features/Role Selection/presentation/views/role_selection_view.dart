@@ -3,10 +3,12 @@ import 'package:medi_cloud_app/Core/utils/app_images.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/Core/utils/user_roles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medi_cloud_app/Core/utils/widgets/patient_main_screen.dart';
 import 'package:medi_cloud_app/features/Auth/auth_cubit/auth_cubit.dart';
 import 'package:medi_cloud_app/features/Doctor%20Auth/presentation/view%20models/views/doctor_login_view.dart';
 import 'package:medi_cloud_app/features/Hospital%20Auth/presentation/view%20models/views/hospital_login_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/patient_login_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_home_view.dart';
 import 'package:medi_cloud_app/features/Role%20Selection/presentation/views/widgets/custome_button.dart';
 import 'package:medi_cloud_app/features/Role%20Selection/presentation/views/widgets/selection_role_container.dart';
 
@@ -28,7 +30,7 @@ class RoleSelectionView extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const PatientLoginView(),
+                  builder: (context) => const PatientMainScreen(),
                 ),
               );
               break;
