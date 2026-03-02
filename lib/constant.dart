@@ -16,6 +16,8 @@ const Color kBackgroundColor = Color(0xFFF4F7F9);
 const Color kGreyColor = Color(0xFF6C7072);
 // White color with 20% opacity (Used for icon backgrounds on dark cards)
 const Color kWhiteOpacity20 = Color(0x33FFFFFF);
+// TextField Fill Color:
+const Color kTexrFieldFillColor = Color(0xffc8e0e0);
 
 // --- Decorations (Borders & Shadows) ---
 abstract class AppDecorations {
