@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/patient_model.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/patient_home_view_body.dart';
 
 class PatientHomeView extends StatelessWidget {
@@ -6,8 +7,6 @@ class PatientHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: PatientHomeViewBody(),
-    );
+    return const Scaffold(body: PatientHomeViewBody());
   }
 }
