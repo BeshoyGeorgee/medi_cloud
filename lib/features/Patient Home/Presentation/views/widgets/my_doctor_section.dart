@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:medi_cloud_app/Core/utils/app_images.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/constant.dart';
 import 'my_doc_hos_card.dart';
+
 
 class MyDoctorSection extends StatelessWidget {
   const MyDoctorSection({super.key});
@@ -11,7 +13,7 @@ class MyDoctorSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Section Title
+        // --- Section Title ---
         Text(
           'My Doctors',
           style: Styles.textStyle22Bold.copyWith(color: kShadePrimaryColor),
@@ -28,7 +30,9 @@ class MyDoctorSection extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(height: 15),
           itemBuilder: (context, index) {
             return MyDocHosCard(
-              imageUrl: 'https://cdn-icons-png.flaticon.com/512/8200/8200631.png', // Mock Image
+              // 2. CHANGED: Using imageAsset with the local image variable
+              // Make sure to replace 'Assets.imagesDocCard2' with the correct icon/image variable from your assets file
+              imageAsset: Assets.imagesDoctorCard, 
               title: 'Dr. Jenny Wilson',
               subtitle: 'Neurologist | Vcare Clinic',
               onTap: () {
