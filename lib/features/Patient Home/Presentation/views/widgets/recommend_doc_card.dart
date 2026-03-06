@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medi_cloud_app/Core/utils/app_images.dart'; // Make sure this is correct
+import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/constant.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/custom_outline_button.dart';
@@ -72,7 +74,7 @@ class RecommendDoctorCard extends StatelessWidget {
                     child: CustomOutlinedButton(
                       text: 'follow up',
                       onPressed: () {
-                        debugPrint('Request to follow up pressed');
+                        GoRouter.of(context).push(AppRouter.kDoctorDetailsView,extra: false,);
                       },
                     ),
                   ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medi_cloud_app/Core/utils/app_images.dart';
+import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/constant.dart';
 import 'my_doc_hos_card.dart';
@@ -36,7 +38,8 @@ class MyDoctorSection extends StatelessWidget {
               title: 'Dr. Jenny Wilson',
               subtitle: 'Neurologist | Vcare Clinic',
               onTap: () {
-                debugPrint('Doctor card clicked: $index');
+                GoRouter.of(context).push(AppRouter.kDoctorDetailsView,extra: true,);
+               
               },
             );
           },

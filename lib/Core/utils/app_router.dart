@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medi_cloud_app/features/Doctor%20Auth/presentation/view%20models/views/doctor_login_view.dart';
 import 'package:medi_cloud_app/features/Hospital%20Auth/presentation/view%20models/views/hospital_login_view.dart';
@@ -5,6 +6,7 @@ import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20model
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/patient_login_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/success_registration_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Dashboard/Presentation/view/patient_dashboard_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Doctor/Data/doctor_profile_cubit.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/doctor_details_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/explore_doctors_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/success_view.dart';
@@ -81,19 +83,27 @@ abstract class AppRouter {
           return const SuccessRegistrationView();
         },
       ),
-       GoRoute(
+      GoRoute(
         path: kExploreDoctorsView,
         builder: (context, GoRouterState state) {
           return const ExploreDoctorsView();
         },
       ),
-        GoRoute(
+      // جوه الـ AppRouter بتاعك
+      GoRoute(
         path: kDoctorDetailsView,
-        builder: (context, GoRouterState state) {
-          return const DoctorDetailsView();
+        builder: (context, state) {
+          // هنا بنستقبل القيمة اللي جاية من الشاشة اللي قبلها، ولو مفيش بنخليها false كافتراضي
+          final bool isMyDoctor = state.extra as bool? ?? false;
+
+          return BlocProvider(
+            // هنا الكيوبت هياخد القيمة بناءً على إنت جاي منين
+            create: (context) => DoctorProfileCubit(isFollowed: isMyDoctor),
+            child: const DoctorDetailsView(),
+          );
         },
       ),
-       GoRoute(
+      GoRoute(
         path: kSuccessDocComfView,
         builder: (context, GoRouterState state) {
           return const SuccessDocComfView();
