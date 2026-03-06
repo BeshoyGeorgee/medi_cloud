@@ -53,7 +53,7 @@ class _CustomLabeledTextFieldState extends State<CustomLabeledTextField> {
       children: [
         Text(
           widget.label,
-          style: Styles.textStyle18Bold.copyWith(
+          style: Styles.textStyle16Bold.copyWith(
             color: const Color(0xff0D1B34),
             fontWeight: FontWeight.w500,
           ),

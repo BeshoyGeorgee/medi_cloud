@@ -25,7 +25,7 @@ class CustomPhoneField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Styles.textStyle20.copyWith(
+          style: Styles.textStyle18Bold.copyWith(
             color: const Color(0xff0D1B34),
             fontWeight: FontWeight.w500,
           ),
