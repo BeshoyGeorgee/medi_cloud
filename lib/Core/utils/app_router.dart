@@ -1,13 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:medi_cloud_app/features/Doctor%20Auth/presentation/view%20models/views/doctor_login_view.dart';
 import 'package:medi_cloud_app/features/Hospital%20Auth/presentation/view%20models/views/hospital_login_view.dart';
-import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/patient_model.dart';
-
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/patient_SignUp_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/patient_login_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/success_registration_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Dashboard/Presentation/view/patient_dashboard_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/doctor_details_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/explore_doctors_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/success_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_home_view.dart';
 import 'package:medi_cloud_app/features/Role%20Selection/presentation/views/role_selection_view.dart';
 import 'package:medi_cloud_app/features/SplashScreen/presentation/views/SplashView.dart';
@@ -23,6 +23,8 @@ abstract class AppRouter {
   static const kPatientSignUpView = '/patientSignUpView';
   static const kSuccessRegistrationView = '/successRegistrationView';
   static const kExploreDoctorsView = '/exploreDoctorsView';
+  static const kDoctorDetailsView = '/doctorDetailsView';
+  static const kSuccessDocComfView = '/successDocComfView';
   static final Router = GoRouter(
     routes: [
       GoRoute(
@@ -83,6 +85,18 @@ abstract class AppRouter {
         path: kExploreDoctorsView,
         builder: (context, GoRouterState state) {
           return const ExploreDoctorsView();
+        },
+      ),
+        GoRoute(
+        path: kDoctorDetailsView,
+        builder: (context, GoRouterState state) {
+          return const DoctorDetailsView();
+        },
+      ),
+       GoRoute(
+        path: kSuccessDocComfView,
+        builder: (context, GoRouterState state) {
+          return const SuccessDocComfView();
         },
       ),
     ],

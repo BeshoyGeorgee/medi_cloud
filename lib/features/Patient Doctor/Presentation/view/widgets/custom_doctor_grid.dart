@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'custom_doctor_card.dart';
 
 class CustomDoctorGrid extends StatelessWidget {
@@ -15,11 +17,16 @@ class CustomDoctorGrid extends StatelessWidget {
         crossAxisCount: 2, // Number of columns in the grid
         crossAxisSpacing: 16, // Horizontal spacing between cards
         mainAxisSpacing: 16, // Vertical spacing between cards
-        childAspectRatio: 0.75, // Adjust this value if you face bottom overflow issues in the card
+        childAspectRatio:
+            0.75, // Adjust this value if you face bottom overflow issues in the card
       ),
       itemCount: 6, // Mock item count
       itemBuilder: (context, index) {
-        return const CustomDoctorCard(); 
+        return  CustomDoctorCard(
+          onTap:(){
+            GoRouter.of(context).push(AppRouter.kDoctorDetailsView);
+          },
+        );
       },
     );
   }
