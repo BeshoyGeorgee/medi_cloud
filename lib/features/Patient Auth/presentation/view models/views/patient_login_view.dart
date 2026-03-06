@@ -84,6 +84,7 @@ class _PatientLoginViewState extends State<PatientLoginView> {
                     text: "Log In",
                     onPressed: () {
                       // منطق تسجيل الدخول الخام
+                      GoRouter.of(context).push(AppRouter.kPatientHomeView);
                     },
                     width: 190,
                   ),

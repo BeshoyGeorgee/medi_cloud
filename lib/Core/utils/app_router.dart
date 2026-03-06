@@ -7,6 +7,7 @@ import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20model
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/patient_login_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/success_registration_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Dashboard/Presentation/view/patient_dashboard_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/explore_doctors_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_home_view.dart';
 import 'package:medi_cloud_app/features/Role%20Selection/presentation/views/role_selection_view.dart';
 import 'package:medi_cloud_app/features/SplashScreen/presentation/views/SplashView.dart';
@@ -21,6 +22,7 @@ abstract class AppRouter {
   static const kPatientLoginView = '/patientLoginView';
   static const kPatientSignUpView = '/patientSignUpView';
   static const kSuccessRegistrationView = '/successRegistrationView';
+  static const kExploreDoctorsView = '/exploreDoctorsView';
   static final Router = GoRouter(
     routes: [
       GoRoute(
@@ -75,6 +77,12 @@ abstract class AppRouter {
         path: kSuccessRegistrationView,
         builder: (context, GoRouterState state) {
           return const SuccessRegistrationView();
+        },
+      ),
+       GoRoute(
+        path: kExploreDoctorsView,
+        builder: (context, GoRouterState state) {
+          return const ExploreDoctorsView();
         },
       ),
     ],
