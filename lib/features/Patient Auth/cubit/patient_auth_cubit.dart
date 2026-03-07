@@ -95,6 +95,30 @@ class PatientAuthCubit extends Cubit<PatientAuthState> {
     }
   }
 
+  
+//Login Handling
+  Future<void> loginPatient() async {
+  emit(PatientAuthLoading()); // أول حاجة نبعت حالة التحميل
+  try {
+    await patientAuthRepo.loginPatient(
+      email: emailController.text.trim(),
+      password: passwordController.text,
+    );
+    emit(PatientAuthSuccess());
+  } catch (e) {
+    String errorMsg = "Wrong email or password"; // الرسالة الافتراضية
+    
+    // لو عايز تفاصيل أكتر من Supabase
+    if (e.toString().contains("Invalid login credentials")) {
+      errorMsg = "Wrong email or password. Please try again.";
+    } else if (e.toString().contains("network")) {
+      errorMsg = "Check your internet connection";
+    }
+
+    emit(PatientAuthFailure(errorMsg));
+  }
+}
+
   // تنظيف الذاكرة مهم جداً عشان الأداء في الـ Pixel 8 Pro
   @override
   Future<void> close() {
