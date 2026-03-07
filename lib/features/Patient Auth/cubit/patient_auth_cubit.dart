@@ -16,13 +16,17 @@ class PatientAuthCubit extends Cubit<PatientAuthState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   // --- Step 2 Controllers ---
   final TextEditingController nationalIdController = TextEditingController();
   final TextEditingController motherNameController = TextEditingController();
-  final TextEditingController emergencyContactController = TextEditingController();
+  final TextEditingController emergencyContactController =
+      TextEditingController();
   final TextEditingController birthDateController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
 
   // --- باقي المتغيرات (اللي مش محتاجة TextField مباشر أو ليها تعامل خاص) ---
   String? gender;
@@ -38,10 +42,9 @@ class PatientAuthCubit extends Cubit<PatientAuthState> {
 
   Future<void> registerPatient() async {
     // التأكد إن البيانات الأساسية موجودة (بنقرأ من الـ controller.text)
-    if (emailController.text.isEmpty || 
-        passwordController.text.isEmpty || 
+    if (emailController.text.isEmpty ||
+        passwordController.text.isEmpty ||
         firstNameController.text.isEmpty) {
-      
       emit(PatientAuthFailure("Please fill in all required fields"));
       return;
     }
@@ -50,7 +53,8 @@ class PatientAuthCubit extends Cubit<PatientAuthState> {
     try {
       final patient = PatientModel(
         // بنجمع الاسم الأول والأخير هنا وقت التسجيل
-        fullName: "${firstNameController.text} ${lastNameController.text}".trim(),
+        fullName:
+            "${firstNameController.text} ${lastNameController.text}".trim(),
         phoneNumber: phoneController.text,
         gender: gender ?? "Not Specified",
         birthDate: birthDate ?? "",
