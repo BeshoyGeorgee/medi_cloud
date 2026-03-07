@@ -1,7 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:medi_cloud_app/features/Doctor%20Auth/presentation/view%20models/views/doctor_login_view.dart';
 import 'package:medi_cloud_app/features/Hospital%20Auth/presentation/view%20models/views/hospital_login_view.dart';
-import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/patient_model.dart';
 
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/patient_SignUp_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/patient_login_view.dart';

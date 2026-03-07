@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medi_cloud_app/Core/utils/app_images.dart';
 import 'package:medi_cloud_app/Core/utils/app_router.dart';
-import 'package:medi_cloud_app/constant.dart';
-import 'package:medi_cloud_app/features/Role%20Selection/presentation/views/role_selection_view.dart';
 import 'package:medi_cloud_app/features/SplashScreen/presentation/views/widgets/sliding_text.dart';
 
 //Splash view body is the main widget of the splash view and
