@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/Core/utils/widgets/custom_button.dart';
-import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/success_registration_card.dart';
 
 class SuccessRegistrationView extends StatelessWidget {

@@ -10,57 +10,97 @@ import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20model
 
 class Step2PersonalDetails extends StatelessWidget {
   final VoidCallback onNext;
+  // 1. إضافة Form Key لعمل Validation لبيانات الخطوة الثانية
+  static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   const Step2PersonalDetails({super.key, required this.onNext});
 
   @override
   Widget build(BuildContext context) {
     final authCubit = context.read<PatientAuthCubit>();
+
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const TitleText(text: "Personal Details"),
-          const SizedBox(height: 20),
-          CustomLabeledTextField(
-            label: "National Number",
-            hintText: "30**********",
-            onChanged: (val) => authCubit.nationalId = val,
-          ),
-          const SizedBox(height: 18),
-          CustomLabeledTextField(
-            label: "Mother's Name",
-            hintText: "mother's name",
-            onChanged: (val) => authCubit.motherName = val,
-          ),
-          SizedBox(height: 18),
-          CustomPhoneField(
-            title: "Emergency Contact Info",
-            onChanged: (val) => authCubit.emergencyContactInfo = val,
-          ),
-          const SizedBox(height: 18),
-          GenderAndBirthDateTextFieldRow(),
-          const SizedBox(height: 60),
-          Center(
-            child: CustomButton(
-              text: "Continue",
-              onPressed: () {
-                // ده التست اللي هيعرفنا كل حاجة واصلة ولا لأ
-                print("======= CHECKING STEP 2 DATA =======");
-                print("National ID: ${authCubit.nationalId}");
-                print("Mother's Name: ${authCubit.motherName}");
-                print("Emergency Contact: ${authCubit.emergencyContactInfo}");
-                print("Gender: ${authCubit.gender}");
-                print("Birth Date: ${authCubit.birthDate}");
-                print("====================================");
+      child: Form(
+        key: formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const TitleText(text: "Personal Details"),
+            const SizedBox(height: 20),
 
-                // لو البيانات بتطبع، انقل للخطوة اللي بعدها
-                onNext();
+            // الرقم القومي
+            CustomLabeledTextField(
+              label: "National Number",
+              hintText: "30**********",
+              controller: authCubit.nationalIdController,
+              maxLines: 14,
+              // الربط بالكنترولر
+              keyboardType: TextInputType.number,
+              validator: (val) {
+                if (val == null || val.isEmpty) {
+                  return "National ID is required";
+                }
+
+                // فحص لو فيه حروف مستخبية (Regex للأرقام فقط)
+                final digitsOnly = RegExp(r'^[0-9]+$');
+                if (!digitsOnly.hasMatch(val)) {
+                  return "Numbers only, please";
+                }
+
+                if (val.length < 14) {
+                  return "Must be 14 digits (Current: ${val.length})";
+                }
+                return null;
               },
-              width: 190,
             ),
-          ),
-        ],
+
+            const SizedBox(height: 18),
+
+            // اسم الأم
+            CustomLabeledTextField(
+              label: "Mother's Name",
+              hintText: "mother's name",
+              controller: authCubit.motherNameController, // الربط بالكنترولر
+              validator:
+                  (val) =>
+                      val == null || val.isEmpty
+                          ? "Enter your mother's name"
+                          : null,
+            ),
+
+            const SizedBox(height: 18),
+
+            // رقم الطوارئ
+            CustomPhoneField(
+              title: "Emergency Contact Info",
+              controller:
+                  authCubit.emergencyContactController, // الربط بالكنترولر
+            ),
+
+            const SizedBox(height: 18),
+
+            // الصف الخاص بالجنس وتاريخ الميلاد
+            const GenderAndBirthDateTextFieldRow(),
+
+            const SizedBox(height: 60),
+
+            Center(
+              child: CustomButton(
+                text: "Continue",
+                onPressed: () {
+                  // الفحص قبل الانتقال لـ Step 3
+                  if (formKey.currentState!.validate()) {
+                    print("======= STEP 2 VALIDATED =======");
+                    onNext();
+                  }
+                },
+                width: 190,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -4,8 +4,9 @@ import 'package:medi_cloud_app/constant.dart';
 
 class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final VoidCallback? onBack;
 
-  const CustomAuthAppBar({super.key, required this.title});
+  const CustomAuthAppBar({super.key, required this.title, this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
       // زرار الرجوع ثابت في كل الحالات بيرجع للشاشة اللي قبلها
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Color(0xff363853), size: 32),
-        onPressed: () => Navigator.pop(context),
+        onPressed: onBack ?? () => Navigator.pop(context),
       ),
       title: Text(
         title,
