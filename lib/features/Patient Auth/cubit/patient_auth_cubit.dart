@@ -75,7 +75,22 @@ class PatientAuthCubit extends Cubit<PatientAuthState> {
       emit(PatientAuthSuccess());
     } catch (e) {
       if (!isClosed) {
-        emit(PatientAuthFailure(e.toString()));
+        String errorMessage = "An unexpected error occurred";
+
+        // فحص نوع الخطأ وتحويله لرسالة مفهومة
+        if (e.toString().contains("user_already_exists")) {
+          errorMessage =
+              "This email is already registered. Please try logging in.";
+        } else if (e.toString().contains("network_error")) {
+          errorMessage = "Please check your internet connection.";
+        } else if (e.toString().contains("invalid-email")) {
+          errorMessage = "The email address is badly formatted.";
+        } else {
+          // لو الخطأ مش معروف، ابعت الرسالة الأصلية أو الرسالة الافتراضية
+          errorMessage = e.toString();
+        }
+
+        emit(PatientAuthFailure(errorMessage));
       }
     }
   }
