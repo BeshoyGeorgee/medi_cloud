@@ -15,13 +15,14 @@ class CustomLabeledTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon; // الأيقونة اللي هتظهر على الشمال
   final Function(String)? onChanged; // أضفنا هذا السطر
+  final String? Function(String?)? validator;
 
   const CustomLabeledTextField({
     super.key,
     required this.label,
     required this.hintText,
     this.width,
-    this.height = 55,
+    this.height = 75,
     this.isPassword = false,
     this.controller,
     this.keyboardType,
@@ -30,6 +31,7 @@ class CustomLabeledTextField extends StatefulWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.onChanged, // أضفنا هذا السطر
+    this.validator,
   });
 
   @override
@@ -60,9 +62,9 @@ class _CustomLabeledTextFieldState extends State<CustomLabeledTextField> {
         ),
         const SizedBox(height: 12),
         SizedBox(
-          width: widget.width ?? double.infinity,
           height: widget.height,
           child: TextFormField(
+            validator: widget.validator,
             controller: widget.controller,
             onChanged: widget.onChanged, // ربط الـ onChanged بالـ TextFormField
             obscureText: obscureText,
@@ -79,10 +81,10 @@ class _CustomLabeledTextFieldState extends State<CustomLabeledTextField> {
               ),
               filled: true,
               fillColor: kTexrFieldFillColor,
-
+          
               // الأيقونة اللي على الشمال (السهم في حالتنا)
               prefixIcon: widget.prefixIcon,
-
+          
               // الأيقونة اللي على اليمين (العين في حالة الباسوورد)
               suffixIcon:
                   widget.isPassword
@@ -100,11 +102,38 @@ class _CustomLabeledTextFieldState extends State<CustomLabeledTextField> {
                         ),
                       )
                       : widget.suffixIcon,
+          
+              //error design handling
+              errorStyle: const TextStyle(
+                fontSize: 12, // تصغير الخط عشان يبان كله
+                color: Colors.red,
+                fontWeight: FontWeight.w400,
+              ),
+              errorMaxLines: 1,
 
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
                 borderSide: BorderSide.none,
+              ),
+          
+              //error border
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: const BorderSide(color: Colors.red, width: 1.5),
+              ),
+          
+              //when there is and error and the user want to skip
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: const BorderSide(color: Colors.red, width: 2),
+              ),
+          
+              //when there is no error and the user want to continue
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: const BorderSide(color: kPrimaryColor, width: 1),
               ),
             ),
           ),

@@ -9,6 +9,8 @@ class SignUpRowInputForNewAccountCreation extends StatelessWidget {
   final bool isPassword; // خليناها bool عادية طالما فيه قيمة افتراضية
   final Function(String)? onChanged1;
   final Function(String)? onChanged2;
+  final String? Function(String?)? validator1;
+  final String? Function(String?)? validator2;
 
   const SignUpRowInputForNewAccountCreation({
     super.key,
@@ -19,6 +21,8 @@ class SignUpRowInputForNewAccountCreation extends StatelessWidget {
     this.isPassword = false, // القيمة الافتراضية
     this.onChanged1,
     this.onChanged2,
+    required this.validator1,
+    required this.validator2,
   });
 
   @override
@@ -28,6 +32,7 @@ class SignUpRowInputForNewAccountCreation extends StatelessWidget {
       children: [
         Expanded( // يفضل استخدام Expanded بدل width ثابت عشان الـ Responsive
           child: CustomLabeledTextField(
+            validator: validator1,
             label: Label1,
             hintText: hintText1,
             // اتأكد إن الاسم جوه الـ Widget دي isPassword مش obscureText
@@ -38,6 +43,7 @@ class SignUpRowInputForNewAccountCreation extends StatelessWidget {
         const SizedBox(width: 15), // مسافة ثابتة بين الحقلين
         Expanded(
           child: CustomLabeledTextField(
+            validator: validator2,
             label: Label2,
             hintText: hintText2,
             isPassword: isPassword,
