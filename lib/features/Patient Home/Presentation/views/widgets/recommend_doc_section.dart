@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/constant.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/custom_list_view.dart';
@@ -21,7 +23,7 @@ class RecommendDoctorSection extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                debugPrint('See all doctors pressed');
+                GoRouter.of(context).push(AppRouter.kExploreDoctorsView);
               },
               child: Text(
                 'See all',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medi_cloud_app/Core/utils/app_images.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/Core/utils/widgets/custom_button.dart';
 import 'package:medi_cloud_app/constant.dart';
@@ -13,16 +14,17 @@ class ConnectWerableDevice extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: AppDecorations.borderRadius25, // استخدام البوردر الموحد
-        boxShadow: [AppDecorations.defaultShadow], // استخدام الشادو الموحد
+        borderRadius: AppDecorations.borderRadius25, 
+        boxShadow: [AppDecorations.defaultShadow], 
       ),
       child: Column(
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // --- Text Section ---
+              // Text will take all available remaining space safely
               Expanded(
-                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -44,18 +46,28 @@ class ConnectWerableDevice extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Image.network(
-                  'https://ouch-cdn2.icons8.com/mO_p9-8y9E-kYq1Xz1Xz1Xz1Xz1Xz1Xz1Xz1Xz1Xz1Xz.png',
+              
+              const SizedBox(width: 16),
+              
+              // --- Image Section ---
+              // Removed Expanded to prevent it from being constrained by the text height.
+              // Used Transform.scale to visually enlarge the watch without breaking the layout constraints.
+              Transform.scale(
+                scale: 1.4, // This scales the image up by 40%. You can increase it to 1.5 or 1.6 if needed!
+                child: Image.asset(
+                  Assets.imagesSmartWatch,
+                  // Base dimensions for the image placeholder
+                  width: 100, 
                   height: 100,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain, 
                 ),
               ),
             ],
           ),
+          
           const SizedBox(height: 20),
-          // --- Action Button (Using our Reusable CustomButton) ---
+          
+          // --- Action Button ---
           CustomButton(
             text: 'Connect',
             onPressed: () {

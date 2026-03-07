@@ -28,7 +28,7 @@ class MediCloudApp extends StatelessWidget {
         BlocProvider(create: (context) => PatientAuthCubit(PatientAuthRepo())),
       ],
       child: MaterialApp.router(
-        routerConfig: AppRouter.Router,
+        routerConfig: AppRouter.router,
 
         //Set the theme to the light and unify the background color to the one defined in the constants file
         theme: AppTheme.lightTheme,
