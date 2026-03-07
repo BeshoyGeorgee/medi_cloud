@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medi_cloud_app/Core/utils/widgets/custome_app_bar.dart';
-import 'package:medi_cloud_app/constant.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/cubit/patient_auth_cubit.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/data/repo/patient_auth_repo.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/step3_body_measurments.dart';
@@ -32,6 +31,19 @@ class _PatientSignupViewState extends State<PatientSignupView> {
     }
   }
 
+  //Handle Previous Step for the arrow
+  void previousStep() {
+    if (_currentStep > 1) {
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      // لو إنت في أول خطوة وعايز ترجع فعلاً للـ Login
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -39,7 +51,7 @@ class _PatientSignupViewState extends State<PatientSignupView> {
       create: (context) => PatientAuthCubit(PatientAuthRepo()),
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: const CustomAuthAppBar(title: "Sign Up"),
+        appBar: CustomAuthAppBar(title: "Sign Up", onBack: previousStep),
         body: Column(
           children: [
             Padding(

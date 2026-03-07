@@ -37,44 +37,34 @@ abstract class AppRouter {
   static const kSuccessDocComfView = '/successDocComfView';
   static const kPatientMainScreen = '/patientMainScreen';
   static const kSuccessHospitalJoinView = '/successHospitalJoinView';
-
   static const kExploreHospitalView = '/exploreHospitalView';
   static const kHospitalDetailsView = '/hospitalDetailsView';
   static const kMyHospitalDashboardView = '/myHospitalDashboardView';
   static const kRequestReportView = '/requestReportView';
   static const kTestResultPdfView = '/testResultPdfView';
 
-  static final Router = GoRouter(
+  // التعديل هنا: خليناها router بحرف سمول
+  static final router = GoRouter(
     routes: [
       GoRoute(
         path: kPatientMainScreen,
-        builder:
-            (context, state) =>
-                const PatientMainScreen(), // دي الشاشة اللي إنت عاملها
+        builder: (context, state) => const PatientMainScreen(), 
       ),
       GoRoute(
         path: kSuccessHospitalJoinView,
-        builder:
-            (context, state) =>
-                const SuccessHospitalJoinView(), // دي الشاشة اللي إنت عاملها
+        builder: (context, state) => const SuccessHospitalJoinView(), 
       ),
       GoRoute(
         path: kTestResultPdfView,
-        builder: (context, GoRouterState state) {
-          return const TestResultPdfView();
-        },
+        builder: (context, state) => const TestResultPdfView(),
       ),
       GoRoute(
         path: kRequestReportView,
-        builder: (context, GoRouterState state) {
-          return const RequestReportView();
-        },
+        builder: (context, state) => const RequestReportView(),
       ),
       GoRoute(
         path: kMyHospitalDashboardView,
-        builder: (context, GoRouterState state) {
-          return const MyHospitalDashboardView();
-        },
+        builder: (context, state) => const MyHospitalDashboardView(),
       ),
       GoRoute(
         path: kHospitalDetailsView,
@@ -87,80 +77,56 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kExploreHospitalView,
-        builder: (context, GoRouterState state) {
-          return const ExploreHospitalView();
-        },
+        builder: (context, state) => const ExploreHospitalView(),
       ),
-
       GoRoute(
         path: kSplashView,
-        builder: (context, GoRouterState state) {
-          return const Splashview();
-        },
+        // التعديل هنا: SplashView بحرف V كابيتال
+        builder: (context, state) => const Splashview(),
       ),
       GoRoute(
         path: kRoleSelectionView,
-        builder: (context, GoRouterState state) {
-          return const RoleSelectionView();
-        },
+        builder: (context, state) => const RoleSelectionView(),
       ),
       GoRoute(
         path: kPatientLoginView,
-        builder: (context, GoRouterState state) {
-          return const PatientLoginView();
-        },
+        builder: (context, state) => const PatientLoginView(),
       ),
       GoRoute(
         path: kPatientSignUpView,
-        builder: (context, GoRouterState state) {
-          return const PatientSignupView();
-        },
+        // التعديل هنا: PatientSignUpView بحرف U كابيتال
+        builder: (context, state) => const PatientSignupView(),
       ),
       GoRoute(
         path: kPatientHomeView,
-        builder: (context, GoRouterState state) {
-          return PatientHomeView();
-        },
+        // ضفنا const هنا
+        builder: (context, state) => const PatientHomeView(),
       ),
       GoRoute(
         path: kPatientDashboardView,
-        builder: (context, GoRouterState state) {
-          return const PatientDashboardView();
-        },
+        builder: (context, state) => const PatientDashboardView(),
       ),
       GoRoute(
         path: kDoctorAuthView,
-        builder: (context, GoRouterState state) {
-          return const DoctorLoginView();
-        },
+        builder: (context, state) => const DoctorLoginView(),
       ),
       GoRoute(
         path: kHospitalAuthView,
-        builder: (context, GoRouterState state) {
-          return const HospitalLoginView();
-        },
+        builder: (context, state) => const HospitalLoginView(),
       ),
       GoRoute(
         path: kSuccessRegistrationView,
-        builder: (context, GoRouterState state) {
-          return const SuccessRegistrationView();
-        },
+        builder: (context, state) => const SuccessRegistrationView(),
       ),
       GoRoute(
         path: kExploreDoctorsView,
-        builder: (context, GoRouterState state) {
-          return const ExploreDoctorsView();
-        },
+        builder: (context, state) => const ExploreDoctorsView(),
       ),
-      // جوه الـ AppRouter بتاعك
       GoRoute(
         path: kDoctorDetailsView,
         builder: (context, state) {
-          // هنا بنستقبل القيمة اللي جاية من الشاشة اللي قبلها، ولو مفيش بنخليها false كافتراضي
           final bool isMyDoctor = state.extra as bool? ?? false;
-
           return BlocProvider(
-            // هنا الكيوبت هياخد القيمة بناءً على إنت جاي منين
             create: (context) => DoctorProfileCubit(isFollowed: isMyDoctor),
             child: const DoctorDetailsView(),
           );
@@ -168,9 +134,7 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kSuccessDocComfView,
-        builder: (context, GoRouterState state) {
-          return const SuccessDocComfView();
-        },
+        builder: (context, state) => const SuccessDocComfView(),
       ),
     ],
   );

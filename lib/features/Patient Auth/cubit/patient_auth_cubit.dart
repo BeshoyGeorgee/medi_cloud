@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-
+import 'package:flutter/material.dart'; // ضروري عشان الـ TextEditingController
 import 'package:medi_cloud_app/features/Patient%20Auth/data/repo/patient_auth_repo.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/patient_model.dart';
 import 'package:meta/meta.dart';
@@ -10,15 +10,27 @@ class PatientAuthCubit extends Cubit<PatientAuthState> {
   final PatientAuthRepo patientAuthRepo;
   PatientAuthCubit(this.patientAuthRepo) : super(PatientAuthInitial());
 
-  String? email;
-  String? password;
-  String? fullName;
-  String? phoneNumber;
+  // --- Step 1 Controllers ---
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
+  // --- Step 2 Controllers ---
+  final TextEditingController nationalIdController = TextEditingController();
+  final TextEditingController motherNameController = TextEditingController();
+  final TextEditingController emergencyContactController =
+      TextEditingController();
+  final TextEditingController birthDateController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
+
+  // --- باقي المتغيرات (اللي مش محتاجة TextField مباشر أو ليها تعامل خاص) ---
   String? gender;
   String? birthDate;
-  String? nationalId;
-  String? emergencyContactInfo;
-  String? motherName;
   double? height;
   double? weight;
   String? bloodType;
@@ -29,14 +41,10 @@ class PatientAuthCubit extends Cubit<PatientAuthState> {
   };
 
   Future<void> registerPatient() async {
-    print(
-      "Cubit: registerPatient started!",
-    ); // لو السطر ده مطبعش، يبقى المشكلة في الزرار (UI)
-    // التأكد إن أهم البيانات موجودة قبل ما نبدأ
-    if (email == null || password == null || fullName == null) {
-      print(
-        "Cubit Error: Some fields are null! Email: $email, Name: $fullName",
-      );
+    // التأكد إن البيانات الأساسية موجودة (بنقرأ من الـ controller.text)
+    if (emailController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        firstNameController.text.isEmpty) {
       emit(PatientAuthFailure("Please fill in all required fields"));
       return;
     }
@@ -44,30 +52,85 @@ class PatientAuthCubit extends Cubit<PatientAuthState> {
     emit(PatientAuthLoading());
     try {
       final patient = PatientModel(
-        fullName: fullName!,
-        phoneNumber: phoneNumber ?? "", // استخدام قيمة افتراضية أمان أكتر
+        // بنجمع الاسم الأول والأخير هنا وقت التسجيل
+        fullName:
+            "${firstNameController.text} ${lastNameController.text}".trim(),
+        phoneNumber: phoneController.text,
         gender: gender ?? "Not Specified",
         birthDate: birthDate ?? "",
         height: height ?? 0.0,
         weight: weight ?? 0.0,
         bloodType: bloodType ?? "Unknown",
         healthConditions: healthConditions,
-        nationalId: nationalId,
-        motherName: motherName,
-        emergencyContactInfo: emergencyContactInfo,
+        nationalId: nationalIdController.text,
+        motherName: motherNameController.text,
+        emergencyContactInfo: emergencyContactController.text,
       );
 
       await patientAuthRepo.registerPatient(
-        email: email!,
-        Password: password!,
+        email: emailController.text.trim(),
+        Password: passwordController.text,
         patientData: patient,
       );
       emit(PatientAuthSuccess());
     } catch (e) {
-     if (!isClosed) {
-        emit(PatientAuthFailure(e.toString()));
+      if (!isClosed) {
+        String errorMessage = "An unexpected error occurred";
+
+        // فحص نوع الخطأ وتحويله لرسالة مفهومة
+        if (e.toString().contains("user_already_exists")) {
+          errorMessage =
+              "This email is already registered. Please try logging in.";
+        } else if (e.toString().contains("network_error")) {
+          errorMessage = "Please check your internet connection.";
+        } else if (e.toString().contains("invalid-email")) {
+          errorMessage = "The email address is badly formatted.";
+        } else {
+          // لو الخطأ مش معروف، ابعت الرسالة الأصلية أو الرسالة الافتراضية
+          errorMessage = e.toString();
+        }
+
+        emit(PatientAuthFailure(errorMessage));
       }
-      ;
     }
+  }
+
+  
+//Login Handling
+  Future<void> loginPatient() async {
+  emit(PatientAuthLoading()); // أول حاجة نبعت حالة التحميل
+  try {
+    await patientAuthRepo.loginPatient(
+      email: emailController.text.trim(),
+      password: passwordController.text,
+    );
+    emit(PatientAuthSuccess());
+  } catch (e) {
+    String errorMsg = "Wrong email or password"; // الرسالة الافتراضية
+    
+    // لو عايز تفاصيل أكتر من Supabase
+    if (e.toString().contains("Invalid login credentials")) {
+      errorMsg = "Wrong email or password. Please try again.";
+    } else if (e.toString().contains("network")) {
+      errorMsg = "Check your internet connection";
+    }
+
+    emit(PatientAuthFailure(errorMsg));
+  }
+}
+
+  // تنظيف الذاكرة مهم جداً عشان الأداء في الـ Pixel 8 Pro
+  @override
+  Future<void> close() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    nationalIdController.dispose();
+    motherNameController.dispose();
+    emergencyContactController.dispose();
+    return super.close();
   }
 }

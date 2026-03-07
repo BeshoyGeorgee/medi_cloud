@@ -5,11 +5,14 @@ import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 class CustomBloodTypeDropdown extends StatelessWidget {
   final String? value;
   final Function(String?) onChanged;
+  // 1. ضفنا الـ validator هنا
+  final String? Function(String?)? validator; 
 
   const CustomBloodTypeDropdown({
     super.key,
     required this.value,
     required this.onChanged,
+    this.validator, // ضفنا الـ validator في الـ Constructor
   });
 
   @override
@@ -27,6 +30,8 @@ class CustomBloodTypeDropdown extends StatelessWidget {
         const SizedBox(height: 12),
         DropdownButtonFormField<String>(
           value: value,
+          // 2. ربط الـ validator بالـ Widget الأصلية
+          validator: validator, 
           hint: Text(
             "ab",
             style: Styles.textStyle16.copyWith(
@@ -38,7 +43,7 @@ class CustomBloodTypeDropdown extends StatelessWidget {
               return Text(
                 e,
                 style: Styles.textStyle16.copyWith(
-                  color: kPrimaryColor.withOpacity(0.6),
+                  color: Colors.black, // شلنا الـ Opacity هنا عشان لما يختار يبان واضح
                 ),
               );
             }).toList();
@@ -54,20 +59,28 @@ class CustomBloodTypeDropdown extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide.none,
             ),
+            // تظبيط شكل البوردر وقت الخطأ (عشان يفضل 15 radius)
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: const BorderSide(color: Colors.red, width: 1),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: const BorderSide(color: Colors.red, width: 1.5),
+            ),
             prefixIcon: const Icon(
               Icons.keyboard_arrow_down,
               color: kGreyColor,
             ),
           ),
           iconSize: 0,
-          items:
-              ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map((type) {
-                return DropdownMenuItem(
-                  value: type,
-                  child: Text(type, style: Styles.textStyle16),
-                );
-              }).toList(),
-          onChanged: onChanged, // بنمرر التغيير للأب
+          items: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map((type) {
+            return DropdownMenuItem(
+              value: type,
+              child: Text(type, style: Styles.textStyle16),
+            );
+          }).toList(),
+          onChanged: onChanged,
         ),
       ],
     );

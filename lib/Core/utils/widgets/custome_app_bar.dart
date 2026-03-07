@@ -5,12 +5,14 @@ import 'package:medi_cloud_app/constant.dart';
 
 class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final Color? iconColor; // 1. ضفنا المتغير ده عشان نستقبل اللون
+  final Color? iconColor; // الميزة بتاعتك
+  final VoidCallback? onBack; // الميزة اللي جاية من المين
 
   const CustomAuthAppBar({
     super.key,
     required this.title,
-    this.iconColor, // 2. خليناه اختياري عشان الشاشات القديمة متضربش
+    this.iconColor,
+    this.onBack,
   });
 
   @override
@@ -21,12 +23,13 @@ class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       leading: IconButton(
         icon: Icon(
-          Icons.arrow_back, 
-          // 3. هنا الـ Logic: لو الـ iconColor مبعوت استخدمه، لو لأ استخدم القديم
+          Icons.arrow_back,
+          // لو باعتين لون هنستخدمه، لو لأ هنستخدم اللون الديفولت
           color: iconColor ?? const Color(0xff363853), 
           size: 32,
         ),
-        onPressed: () => Navigator.pop(context),
+        // لو باعتين أكشن هنشغله، لو لأ هيعمل pop عادي
+        onPressed: onBack ?? () => Navigator.pop(context),
       ),
       title: Text(
         title,
@@ -35,8 +38,9 @@ class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
+  // السطر ده مهم عشان إنت عامل implements PreferredSizeWidget
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight); 
 }
 
 

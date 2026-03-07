@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:medi_cloud_app/Core/utils/app_router.dart';
-import 'package:medi_cloud_app/Core/utils/textStyles.dart';
-import 'package:medi_cloud_app/Core/utils/widgets/custom_button.dart';
 import 'package:medi_cloud_app/Core/utils/widgets/custome_app_bar.dart';
-import 'package:medi_cloud_app/Core/utils/widgets/custome_textfield.dart';
 import 'package:medi_cloud_app/constant.dart';
-import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/signout_or_signin_row_text.dart';
+import 'package:medi_cloud_app/features/Patient%20Auth/cubit/patient_auth_cubit.dart';
+import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/forget_password_text.dart';
+import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/go_to_sign_up_row.dart';
+import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/login_input_fields.dart';
+import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/login_submit_button.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/widgets/title_text.dart';
 
 class PatientLoginView extends StatefulWidget {
@@ -18,20 +17,12 @@ class PatientLoginView extends StatefulWidget {
 }
 
 class _PatientLoginViewState extends State<PatientLoginView> {
-  // تعريف الـ Key والـ Controllers
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final authCubit = context.read<PatientAuthCubit>();
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: const CustomAuthAppBar(title: "Log In"),
@@ -40,65 +31,28 @@ class _PatientLoginViewState extends State<PatientLoginView> {
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 61),
           child: Form(
             key: formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const TitleText(text: "Welcome"),
                 const SizedBox(height: 84),
 
-                CustomLabeledTextField(
-                  controller: emailController,
-                  label: "Email",
-                  hintText: "example@example.com",
-                ),
+                // 1. حقول الإدخال (Email & Password)
+                LoginInputFields(authCubit: authCubit),
 
-                const SizedBox(height: 18),
+                const SizedBox(height: 10),
+                const ForgetPasswordText(),
 
-                CustomLabeledTextField(
-                  controller: passwordController,
-                  label: "Password",
-                  hintText: "************",
-                  isPassword: true,
-                ),
+                const SizedBox(height: 100),
 
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      // أضف منطق "نسيت كلمة المرور" هنا لاحقاً
-                    },
-                    child: Text(
-                      "Forget Password?",
-                      style: Styles.textStyle12.copyWith(
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 174),
-
-                Center(
-                  child: CustomButton(
-                    text: "Log In",
-                    onPressed: () {
-                      // منطق تسجيل الدخول الخام
-                      GoRouter.of(context).push(AppRouter.kPatientMainScreen);
-                    },
-                    width: 190,
-                  ),
-                ),
+                // 2. زرار الدخول مع الـ Bloc Logic
+                LoginSubmitButton(formKey: formKey, authCubit: authCubit),
 
                 const SizedBox(height: 26),
 
-                SignUpOrSignInRowText(
-                  text: "Don't have an account?",
-                  actionText: "Sign Up",
-                  onTap: () {
-                    GoRouter.of(context).push(AppRouter.kPatientSignUpView);
-                  },
-                ),
+                // 3. التوجيه لإنشاء حساب جديد
+                const GoToSignUpRow(),
               ],
             ),
           ),

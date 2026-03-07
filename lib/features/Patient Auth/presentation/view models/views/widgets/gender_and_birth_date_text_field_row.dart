@@ -16,19 +16,10 @@ class GenderAndBirthDateTextFieldRow extends StatefulWidget {
 
 class _GenderAndBirthDateTextFieldRowState
     extends State<GenderAndBirthDateTextFieldRow> {
-  final TextEditingController genderController = TextEditingController();
-  final TextEditingController birthDateController = TextEditingController();
-
-  @override
-  void dispose() {
-    genderController.dispose();
-    birthDateController.dispose();
-    super.dispose();
-  }
+  // شيلنا الكنترولرز المحلية من هنا عشان هنستخدم اللي في الكيوبيت
 
   @override
   Widget build(BuildContext context) {
-    // تعريف الكيوبيت لاستخدامه في onChanged و onTap
     final authCubit = context.read<PatientAuthCubit>();
 
     return Row(
@@ -41,20 +32,20 @@ class _GenderAndBirthDateTextFieldRowState
             children: [
               Text(
                 "Gender",
-                style: Styles.textStyle20.copyWith(
+                style: Styles.textStyle18Bold.copyWith(
                   color: const Color(0xff0D1B34),
                   fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
+                // السطر ده هو السر: بيقرأ القيمة المتخزنة في الكيوبيت
+                value: authCubit.gender,
                 selectedItemBuilder: (BuildContext context) {
                   return ["Male", "Female"].map<Widget>((String item) {
                     return Text(
                       item,
-                      style: Styles.textStyle16.copyWith(
-                        color: kPrimaryColor.withOpacity(0.6),
-                      ),
+                      style: Styles.textStyle16.copyWith(color: Colors.black),
                     );
                   }).toList();
                 },
@@ -67,10 +58,14 @@ class _GenderAndBirthDateTextFieldRowState
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: kTexrFieldFillColor,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
+                  ),
+                  //error border
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: const BorderSide(color: Colors.red, width: 1.5),
                   ),
                   prefixIcon: const Icon(
                     Icons.keyboard_arrow_down,
@@ -78,24 +73,26 @@ class _GenderAndBirthDateTextFieldRowState
                   ),
                 ),
                 iconSize: 0,
-                items: ["Male", "Female"].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: Styles.textStyle16.copyWith(
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  );
-                }).toList(),
+                items:
+                    ["Male", "Female"].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: Styles.textStyle16.copyWith(
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                 onChanged: (newValue) {
                   setState(() {
-                    genderController.text = newValue!;
                     // تحديث الكيوبيت فوراً
                     authCubit.gender = newValue;
                   });
                 },
+                // إضافة فالي ديشن للـ Gender
+                validator: (val) => val == null ? "Choose your gender" : null,
               ),
             ],
           ),
@@ -107,26 +104,33 @@ class _GenderAndBirthDateTextFieldRowState
           child: CustomLabeledTextField(
             label: "Birth Date",
             hintText: "mm-dd-yyyy",
-            controller: birthDateController,
+            // نستخدم الكنترولر اللي في الكيوبيت مباشرة
+            controller: authCubit.birthDateController,
             readOnly: true,
             prefixIcon: const Icon(
-              Icons.keyboard_arrow_down,
+              Icons.calendar_today_outlined, // غيرتها لشكل تقويم أفضل
               color: kPrimaryColor,
             ),
-            // تمرير الـ authCubit كـ parameter
             onTap: () => _selectDate(context, authCubit),
+            validator:
+                (val) =>
+                    (val == null || val.isEmpty)
+                        ? "Pick your birth date"
+                        : null,
           ),
         ),
       ],
     );
   }
 
-  // تم تعديل توقيع الدالة لتستقبل الـ authCubit
-  Future<void> _selectDate(BuildContext context, PatientAuthCubit authCubit) async {
+  Future<void> _selectDate(
+    BuildContext context,
+    PatientAuthCubit authCubit,
+  ) async {
     DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().subtract(const Duration(days: 365 * 20)),
-      firstDate: DateTime(1950),
+      initialDate: DateTime.now().subtract(const Duration(days: 365 * 18)),
+      firstDate: DateTime(1900),
       lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
@@ -140,8 +144,8 @@ class _GenderAndBirthDateTextFieldRowState
     if (picked != null) {
       setState(() {
         String formattedDate = DateFormat('MM-dd-yyyy').format(picked);
-        birthDateController.text = formattedDate;
-        // تحديث الكيوبيت فوراً بالتاريخ المختار
+        // التحديث بيسمع في الكيوبيت والكنترولر في نفس الوقت
+        authCubit.birthDateController.text = formattedDate;
         authCubit.birthDate = formattedDate;
       });
     }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/Core/utils/widgets/custome_textfield.dart';
-import 'package:medi_cloud_app/constant.dart';
 
 class CmAndKgTextFields extends StatelessWidget {
   final TextEditingController heightController;
@@ -9,12 +7,18 @@ class CmAndKgTextFields extends StatelessWidget {
   final Function(String)? onHeightChanged; // إضافة الـ callback
   final Function(String)? onWeightChanged; // إضافة الـ callback
 
+  // 1. إضافة الـ Validators هنا
+  final String? Function(String?)? heightValidator;
+  final String? Function(String?)? weightValidator;
+
   const CmAndKgTextFields({
     super.key,
     required this.heightController,
     required this.weightController,
     this.onHeightChanged,
     this.onWeightChanged,
+    this.heightValidator,
+    this.weightValidator,
   });
 
   @override
@@ -26,8 +30,10 @@ class CmAndKgTextFields extends StatelessWidget {
             label: "Height",
             hintText: "cm",
             controller: heightController,
+            validator: heightValidator,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            onChanged: onHeightChanged, // ربط الـ onChanged
+            onChanged: onHeightChanged,
+            maxLines: 3, // ربط الـ onChanged
           ),
         ),
         const SizedBox(width: 20),
@@ -36,8 +42,10 @@ class CmAndKgTextFields extends StatelessWidget {
             label: "Weight",
             hintText: "kg",
             controller: weightController,
+            validator: weightValidator,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             onChanged: onWeightChanged, // ربط الـ onChanged
+            maxLines: 3,
           ),
         ),
       ],

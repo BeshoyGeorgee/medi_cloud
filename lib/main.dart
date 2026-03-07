@@ -3,9 +3,9 @@ import 'package:medi_cloud_app/Core/theme/theme_app.dart';
 import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/features/Auth/auth_cubit/auth_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medi_cloud_app/features/Patient%20Auth/cubit/patient_auth_cubit.dart';
+import 'package:medi_cloud_app/features/Patient%20Auth/data/repo/patient_auth_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-import 'features/Auth/auth_cubit/auth_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,10 +22,13 @@ class MediCloudApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AuthCubit()),
+        BlocProvider(create: (context) => PatientAuthCubit(PatientAuthRepo())),
+      ],
       child: MaterialApp.router(
-        routerConfig: AppRouter.Router,
+        routerConfig: AppRouter.router,
 
         //Set the theme to the light and unify the background color to the one defined in the constants file
         theme: AppTheme.lightTheme,
