@@ -16,6 +16,7 @@ class CustomLabeledTextField extends StatefulWidget {
   final Widget? prefixIcon; // الأيقونة اللي هتظهر على الشمال
   final Function(String)? onChanged; // أضفنا هذا السطر
   final String? Function(String?)? validator;
+  final int? maxLines;
 
   const CustomLabeledTextField({
     super.key,
@@ -32,6 +33,7 @@ class CustomLabeledTextField extends StatefulWidget {
     this.prefixIcon,
     this.onChanged, // أضفنا هذا السطر
     this.validator,
+    this.maxLines,
   });
 
   @override
@@ -64,6 +66,7 @@ class _CustomLabeledTextFieldState extends State<CustomLabeledTextField> {
         SizedBox(
           height: widget.height,
           child: TextFormField(
+            maxLength: widget.maxLines,
             validator: widget.validator,
             controller: widget.controller,
             onChanged: widget.onChanged, // ربط الـ onChanged بالـ TextFormField
@@ -74,6 +77,7 @@ class _CustomLabeledTextFieldState extends State<CustomLabeledTextField> {
             textAlignVertical:
                 TextAlignVertical.center, // لضبط النص في المنتصف رأسياً
             decoration: InputDecoration(
+              counterText: "",
               hintText: widget.hintText,
               hintStyle: Styles.textStyle16.copyWith(
                 color: kPrimaryColor.withOpacity(0.6),

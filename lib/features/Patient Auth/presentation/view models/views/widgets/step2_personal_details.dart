@@ -34,12 +34,24 @@ class Step2PersonalDetails extends StatelessWidget {
             CustomLabeledTextField(
               label: "National Number",
               hintText: "30**********",
-              controller: authCubit.nationalIdController, // الربط بالكنترولر
+              controller: authCubit.nationalIdController,
+              maxLines: 14,
+              // الربط بالكنترولر
               keyboardType: TextInputType.number,
               validator: (val) {
-                if (val == null || val.isEmpty)
+                if (val == null || val.isEmpty) {
                   return "National ID is required";
-                if (val.length != 14) return "Must be 14 digits";
+                }
+
+                // فحص لو فيه حروف مستخبية (Regex للأرقام فقط)
+                final digitsOnly = RegExp(r'^[0-9]+$');
+                if (!digitsOnly.hasMatch(val)) {
+                  return "Numbers only, please";
+                }
+
+                if (val.length < 14) {
+                  return "Must be 14 digits (Current: ${val.length})";
+                }
                 return null;
               },
             ),
@@ -52,7 +64,10 @@ class Step2PersonalDetails extends StatelessWidget {
               hintText: "mother's name",
               controller: authCubit.motherNameController, // الربط بالكنترولر
               validator:
-                  (val) => val == null || val.isEmpty ? "Required" : null,
+                  (val) =>
+                      val == null || val.isEmpty
+                          ? "Enter your mother's name"
+                          : null,
             ),
 
             const SizedBox(height: 18),

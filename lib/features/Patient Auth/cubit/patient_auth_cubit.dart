@@ -22,6 +22,7 @@ class PatientAuthCubit extends Cubit<PatientAuthState> {
   final TextEditingController nationalIdController = TextEditingController();
   final TextEditingController motherNameController = TextEditingController();
   final TextEditingController emergencyContactController = TextEditingController();
+  final TextEditingController birthDateController = TextEditingController();
 
   // --- باقي المتغيرات (اللي مش محتاجة TextField مباشر أو ليها تعامل خاص) ---
   String? gender;
