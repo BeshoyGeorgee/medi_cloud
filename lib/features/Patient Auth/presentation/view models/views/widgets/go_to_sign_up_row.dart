@@ -11,7 +11,7 @@ class GoToSignUpRow extends StatelessWidget {
     return SignUpOrSignInRowText(
       text: "Don't have an account?",
       actionText: "Sign Up",
-      onTap: () => GoRouter.of(context).push(AppRouter.kPatientSignUpView),
+      onTap: () => GoRouter.of(context).push(AppRouter.kRoleSelectionView),
     );
   }
 }
