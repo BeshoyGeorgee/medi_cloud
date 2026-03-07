@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medi_cloud_app/Core/utils/app_images.dart';
+import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/constant.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/custom_outline_button.dart';
@@ -63,7 +65,7 @@ class RecomndHospitalCard extends StatelessWidget {
                   child: CustomOutlinedButton(
                     text: 'Join',
                     onPressed: () {
-                      debugPrint('Join Saudi German Hospital');
+                     GoRouter.of(context).push(AppRouter.kHospitalDetailsView);
                     },
                   ),
                 ),

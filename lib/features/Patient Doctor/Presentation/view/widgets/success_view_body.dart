@@ -30,7 +30,7 @@ class SuccessViewBody extends StatelessWidget {
             child: CustomButton(
               text: 'Back to Home',
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.kPatientHomeView);
+               GoRouter.of(context).push(AppRouter.kPatientMainScreen);
               },
             ),
           ),

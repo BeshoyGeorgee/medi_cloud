@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medi_cloud_app/Core/utils/widgets/patient_main_screen.dart';
 import 'package:medi_cloud_app/features/Doctor%20Auth/presentation/view%20models/views/doctor_login_view.dart';
 import 'package:medi_cloud_app/features/Hospital%20Auth/presentation/view%20models/views/hospital_login_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20models/views/patient_SignUp_view.dart';
@@ -11,10 +12,12 @@ import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/docto
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/explore_doctors_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/success_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_home_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Hospital/Data/hospital_details_cubit.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/explore_hospital_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/hospital_details_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/my_hospital_dashboard_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/request_report_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/success_hospital_join_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/test_result_pdf_view.dart';
 import 'package:medi_cloud_app/features/Role%20Selection/presentation/views/role_selection_view.dart';
 import 'package:medi_cloud_app/features/SplashScreen/presentation/views/SplashView.dart';
@@ -32,6 +35,8 @@ abstract class AppRouter {
   static const kExploreDoctorsView = '/exploreDoctorsView';
   static const kDoctorDetailsView = '/doctorDetailsView';
   static const kSuccessDocComfView = '/successDocComfView';
+  static const kPatientMainScreen = '/patientMainScreen';
+  static const kSuccessHospitalJoinView = '/successHospitalJoinView';
 
   static const kExploreHospitalView = '/exploreHospitalView';
   static const kHospitalDetailsView = '/hospitalDetailsView';
@@ -41,6 +46,18 @@ abstract class AppRouter {
 
   static final Router = GoRouter(
     routes: [
+      GoRoute(
+        path: kPatientMainScreen,
+        builder:
+            (context, state) =>
+                const PatientMainScreen(), // دي الشاشة اللي إنت عاملها
+      ),
+      GoRoute(
+        path: kSuccessHospitalJoinView,
+        builder:
+            (context, state) =>
+                const SuccessHospitalJoinView(), // دي الشاشة اللي إنت عاملها
+      ),
       GoRoute(
         path: kTestResultPdfView,
         builder: (context, GoRouterState state) {
@@ -61,8 +78,11 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kHospitalDetailsView,
-        builder: (context, GoRouterState state) {
-          return const HospitalDetailsView();
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => HospitalDetailsCubit(),
+            child: const HospitalDetailsView(),
+          );
         },
       ),
       GoRoute(

@@ -26,6 +26,10 @@ class Assets {
   /// assets/images/saudi_german.jpg
   static const String imagesSaudiGerman = "assets/images/saudi_german.jpg";
 
+  /// Assets for imagesSaudiGermanMap
+  /// assets/images/saudi_german_map.png
+  static const String imagesSaudiGermanMap = "assets/images/saudi_german_map.png";
+
   /// Assets for imagesSmartWatch
   /// assets/images/Smart_Watch.png
   static const String imagesSmartWatch = "assets/images/Smart_Watch.png";
