@@ -7,7 +7,7 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-//Function to select the role and emit the RoleSelected state with the selected role
+  //Function to select the role and emit the RoleSelected state with the selected role
   void selectRole(UserRole role) {
     emit(RoleSelected(role: role));
   }

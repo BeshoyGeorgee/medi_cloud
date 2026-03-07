@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/Core/utils/widgets/custom_button.dart';
 import 'package:medi_cloud_app/Core/utils/widgets/custome_textfield.dart';
 import 'package:medi_cloud_app/features/Patient%20Auth/cubit/patient_auth_cubit.dart';
@@ -11,7 +13,7 @@ import 'package:medi_cloud_app/features/Patient%20Auth/presentation/view%20model
 class Step1AccountDetails extends StatelessWidget {
   final VoidCallback onNext;
   static final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  
+
   const Step1AccountDetails({super.key, required this.onNext});
 
   @override
@@ -28,25 +30,34 @@ class Step1AccountDetails extends StatelessWidget {
           children: [
             const TitleText(text: "Create Account"),
             const SizedBox(height: 10),
-            
+
             SignUpRowInputForNewAccountCreation(
               // نربط الكنترولرز عشان البيانات تفضل ثابتة
               controller1: authCubit.firstNameController,
               controller2: authCubit.lastNameController,
               Label1: "First Name",
               hintText1: "First Name",
-              validator1: (val) => val == null || val.isEmpty ? "Enter your first name" : null,
+              validator1:
+                  (val) =>
+                      val == null || val.isEmpty
+                          ? "Enter your first name"
+                          : null,
               Label2: "Last Name",
               hintText2: "Last Name",
-              validator2: (val) => val == null || val.isEmpty ? "Enter your last name" : null,
+              validator2:
+                  (val) =>
+                      val == null || val.isEmpty
+                          ? "Enter your last name"
+                          : null,
             ),
-            
+
             const SizedBox(height: 12),
-            
+
             CustomLabeledTextField(
               label: "Email",
               hintText: "example@gmail.com",
-              controller: authCubit.emailController, // استخدام الكنترولر من الكيوبيت
+              controller:
+                  authCubit.emailController, // استخدام الكنترولر من الكيوبيت
               validator: (val) {
                 if (val == null || val.isEmpty) return "Enter your email";
                 final gmailRegex = RegExp(r'^[\w-\.]+@gmail\.com$');
@@ -56,33 +67,35 @@ class Step1AccountDetails extends StatelessWidget {
                 return null;
               },
             ),
-            
+
             const SizedBox(height: 18),
-            
+
             CustomPhoneField(
               title: "Phone Number",
               controller: authCubit.phoneController, // ربط الموبايل بالكنترولر
             ),
-            
+
             const SizedBox(height: 18),
-            
+
             SignUpRowInputForNewAccountCreation(
               controller1: authCubit.passwordController,
               controller2: authCubit.confirmPasswordController,
               isPassword: true,
               Label1: "Password",
               hintText1: "password",
-              validator1: (val) => (val?.length ?? 0) < 8 ? "At least 8 chars" : null,
+              validator1:
+                  (val) => (val?.length ?? 0) < 8 ? "At least 8 chars" : null,
               Label2: "Confirm Password",
               hintText2: "confirm password",
               validator2: (val) {
-                if (val != authCubit.passwordController.text) return "Doesn't match";
+                if (val != authCubit.passwordController.text)
+                  return "Doesn't match";
                 return null;
               },
             ),
-            
+
             const SizedBox(height: 40),
-            
+
             Center(
               child: CustomButton(
                 text: "Continue",
@@ -96,9 +109,12 @@ class Step1AccountDetails extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const SignUpOrSignInRowText(
+            SignUpOrSignInRowText(
               text: "Already have an account?",
               actionText: "Login",
+              onTap: () {
+                GoRouter.of(context).push(AppRouter.kPatientLoginView);
+              },
             ),
             const SizedBox(height: 20),
           ],
