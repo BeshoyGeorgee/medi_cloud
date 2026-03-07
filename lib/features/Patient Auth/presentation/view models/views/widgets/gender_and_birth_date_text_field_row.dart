@@ -41,7 +41,7 @@ class _GenderAndBirthDateTextFieldRowState
             children: [
               Text(
                 "Gender",
-                style: Styles.textStyle16Bold.copyWith(
+                style: Styles.textStyle18Bold.copyWith(
                   color: const Color(0xff0D1B34),
                   fontWeight: FontWeight.w500,
                 ),
@@ -53,7 +53,7 @@ class _GenderAndBirthDateTextFieldRowState
                     return Text(
                       item,
                       style: Styles.textStyle16.copyWith(
-                        color: kPrimaryColor.withOpacity(0.6),
+                        color: Colors.black,
                       ),
                     );
                   }).toList();
@@ -67,7 +67,6 @@ class _GenderAndBirthDateTextFieldRowState
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: kTexrFieldFillColor,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
@@ -78,17 +77,18 @@ class _GenderAndBirthDateTextFieldRowState
                   ),
                 ),
                 iconSize: 0,
-                items: ["Male", "Female"].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: Styles.textStyle16.copyWith(
-                        color: kPrimaryColor,
-                      ),
-                    ),
-                  );
-                }).toList(),
+                items:
+                    ["Male", "Female"].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: Styles.textStyle16.copyWith(
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                 onChanged: (newValue) {
                   setState(() {
                     genderController.text = newValue!;
@@ -122,7 +122,10 @@ class _GenderAndBirthDateTextFieldRowState
   }
 
   // تم تعديل توقيع الدالة لتستقبل الـ authCubit
-  Future<void> _selectDate(BuildContext context, PatientAuthCubit authCubit) async {
+  Future<void> _selectDate(
+    BuildContext context,
+    PatientAuthCubit authCubit,
+  ) async {
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now().subtract(const Duration(days: 365 * 20)),

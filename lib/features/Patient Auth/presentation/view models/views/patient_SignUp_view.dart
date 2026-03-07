@@ -32,6 +32,19 @@ class _PatientSignupViewState extends State<PatientSignupView> {
     }
   }
 
+  //Handle Previous Step for the arrow
+  void previousStep() {
+    if (_currentStep > 1) {
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      // لو إنت في أول خطوة وعايز ترجع فعلاً للـ Login
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -39,7 +52,7 @@ class _PatientSignupViewState extends State<PatientSignupView> {
       create: (context) => PatientAuthCubit(PatientAuthRepo()),
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: const CustomAuthAppBar(title: "Sign Up"),
+        appBar: CustomAuthAppBar(title: "Sign Up", onBack: previousStep),
         body: Column(
           children: [
             Padding(
