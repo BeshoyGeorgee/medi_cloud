@@ -41,7 +41,7 @@ class _PatientLoginViewState extends State<PatientLoginView> {
                 // 1. حقول الإدخال (Email & Password)
                 LoginInputFields(authCubit: authCubit),
 
-                const SizedBox(height: 10),
+              
                 const ForgetPasswordText(),
 
                 const SizedBox(height: 100),

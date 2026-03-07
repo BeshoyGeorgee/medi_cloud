@@ -72,9 +72,11 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   void NavigateToAuthView() {
-    //Navigate to the Auth view after 2 seconds
     Future.delayed(const Duration(seconds: 2), () {
-      GoRouter.of(context).go(AppRouter.kRoleSelectionView);
+      // التأكد إن الشاشة لسه معروضة وموجودة في الـ Context
+      if (mounted) {
+        GoRouter.of(context).go(AppRouter.kPatientLoginView);
+      }
     });
   }
 }
