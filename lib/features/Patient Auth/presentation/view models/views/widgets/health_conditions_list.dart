@@ -26,7 +26,7 @@ class HealthConditionsList extends StatelessWidget {
                     child: HealthConditionTile(
                       title: condition,
                       isSelected: conditions[condition]!,
-                      onChanged: (val) => onChanged(condition, val!),
+                      onChanged: (val) => onChanged(condition, val),
                     ),
                   ),
                   if (![
