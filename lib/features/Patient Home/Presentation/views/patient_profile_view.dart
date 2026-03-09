@@ -15,7 +15,7 @@ class PatientProfileView extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const CustomAppBar(title: "Profile"),
+          const CustomAppBar(title: "Profile", showEditIcon: true),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24),

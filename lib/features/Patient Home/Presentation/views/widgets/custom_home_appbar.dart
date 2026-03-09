@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
+import 'package:medi_cloud_app/Core/utils/widgets/patient_main_screen.dart';
 import 'package:medi_cloud_app/constant.dart';
-import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_home_view.dart';
 
 class CustomHomeAppbar extends StatelessWidget {
   const CustomHomeAppbar({super.key});
@@ -12,7 +12,7 @@ class CustomHomeAppbar extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            PatientHomeView.scaffoldKey.currentState!.openDrawer();
+            PatientMainScreen.scaffoldKey.currentState!.openDrawer();
           },
           child: const Icon(Icons.menu, size: 32, color: kShadePrimaryColor),
         ),

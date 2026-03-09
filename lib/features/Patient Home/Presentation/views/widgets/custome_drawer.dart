@@ -48,7 +48,9 @@ class CustomDrawer extends StatelessWidget {
                   imagePath:
                       Assets.imagesIncurance, // استخدمت الـ Assets اللي بعتها
                   title: 'Insurance',
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).push(AppRouter.kInsuranceView);
+                  },
                 ),
                 drawerItem(
                   imagePath: Assets.imagesMinistryOfHealth,
