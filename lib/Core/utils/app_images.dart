@@ -22,9 +22,25 @@ class Assets {
   /// assets/images/Doctor_role.png
   static const String imagesDoctorRole = "assets/images/Doctor_role.png";
 
+  /// Assets for imagesEditButton
+  /// assets/images/edit-button.png
+  static const String imagesEditButton = "assets/images/edit-button.png";
+
+  /// Assets for imagesIncurance
+  /// assets/images/incurance.png
+  static const String imagesIncurance = "assets/images/incurance.png";
+
   /// Assets for imagesMediCloudLogo
   /// assets/images/Medi_Cloud_logo.png
   static const String imagesMediCloudLogo = "assets/images/Medi_Cloud_logo.png";
+
+  /// Assets for imagesMedicloudChatBotLogo
+  /// assets/images/medicloud_chatBot_logo.png
+  static const String imagesMedicloudChatBotLogo = "assets/images/medicloud_chatBot_logo.png";
+
+  /// Assets for imagesMinistryOfHealth
+  /// assets/images/ministry_of_health.png
+  static const String imagesMinistryOfHealth = "assets/images/ministry_of_health.png";
 
   /// Assets for imagesPatientRole
   /// assets/images/Patient_role.png
@@ -45,5 +61,16 @@ class Assets {
   /// Assets for pdfsSampleReport
   /// assets/pdfs/CBC-sample-report-with-notes_0.pdf
  static const String pdfsSampleReport = "assets/pdfs/CBC-sample-report-with-notes_0.pdf";
+  /// Assets for imagesUploadFileIcon
+  /// assets/images/Upload_file_icon.png
+  static const String imagesUploadFileIcon = "assets/images/Upload_file_icon.png";
+
+  /// Assets for imagesUser
+  /// assets/images/user.png
+  static const String imagesUser = "assets/images/user.png";
+
+  /// Assets for imagesWHO
+  /// assets/images/WHO.png
+  static const String imagesWHO = "assets/images/WHO.png";
 }
 

@@ -12,6 +12,11 @@ import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/docto
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/explore_doctors_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/success_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_home_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_insurance_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_profile_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/cardiac_test_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/submit_doctor_syndicate_claim.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/success_claim_screen_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Data/hospital_details_cubit.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/explore_hospital_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/hospital_details_view.dart';
@@ -44,6 +49,11 @@ abstract class AppRouter {
   static const kRequestReportView = '/requestReportView';
   static const kTestResultPdfView = '/testResultPdfView';
   static const kLiveVitalsView = '/liveVitalsView';
+  static const kPatientProfileView = '/patientProfileView';
+  static const kInsuranceView = '/insuranceView';
+  static const kCardiacTestView = '/cardiacTestView';
+  static const kSuccessClaimScreenView = '/successClaimScreenView';
+  static const kSubmitDoctorSyndicateClaim = '/submitDoctorSyndicateClaim';
 
   // التعديل هنا: خليناها router بحرف سمول
   static final router = GoRouter(
@@ -150,6 +160,39 @@ abstract class AppRouter {
       GoRoute(
         path: kSuccessDocComfView,
         builder: (context, state) => const SuccessDocComfView(),
+      ),
+      GoRoute(
+        path: kPatientProfileView,
+        builder: (context, state) => const PatientProfileView(),
+      ),
+      GoRoute(
+        path: kInsuranceView,
+        builder: (context, state) => const InsuranceView(),
+      ),
+      GoRoute(
+        path: kCardiacTestView,
+        builder: (context, state) => const CardiacTestView(),
+      ),
+      GoRoute(
+        path: kSuccessClaimScreenView,
+        builder: (context, state) {
+          // 1. بنحاول ناخد الـ Function من الـ extra
+          // 2. لو الـ extra مبعوت صح، بنستخدمه.
+          // 3. لو مبعوت null (وده سبب الإيرور عندك)، بنعمل Function احتياطية ترجعنا للهوم
+          final onDoneAction =
+              (state.extra is Function)
+                  ? (state.extra as Function)
+                  : () {
+                    GoRouter.of(context).go(AppRouter.kPatientMainScreen);
+                  };
+
+          // بنباصي الـ Action للشاشة
+          return SuccessClaimScreenView(onDone: () => onDoneAction());
+        },
+      ),
+      GoRoute(
+        path: kSubmitDoctorSyndicateClaim,
+        builder: (context, state) => const SubmitDoctorSyndicateClaim(),
       ),
     ],
   );
