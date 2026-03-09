@@ -13,7 +13,7 @@ class HospitalDetailsHeader extends StatelessWidget {
       children: [
         // --- 1. Background Image ---
         Image.asset(
-          Assets.imagesSaudiGerman, // صورة المستشفى أو الـ Cover
+          Assets.imagesSaudiGerman,  
           width: double.infinity,
           height: 320, // ارتفاع الهيدر
           fit: BoxFit.cover,

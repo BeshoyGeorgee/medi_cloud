@@ -48,15 +48,24 @@ abstract class AppRouter {
     routes: [
       GoRoute(
         path: kPatientMainScreen,
-        builder: (context, state) => const PatientMainScreen(), 
+        builder: (context, state) => const PatientMainScreen(),
       ),
       GoRoute(
         path: kSuccessHospitalJoinView,
-        builder: (context, state) => const SuccessHospitalJoinView(), 
+        builder: (context, state) => const SuccessHospitalJoinView(),
       ),
       GoRoute(
         path: kTestResultPdfView,
-        builder: (context, state) => const TestResultPdfView(),
+        builder: (context, state) {
+          // هنا بنستقبل مسار الـ PDF اللي مبعوت من الشاشة اللي قبلها
+          final pdfPath = state.extra as String;
+
+          // بنغلف الشاشة بالكيوبت عشان الـ Bottom Bar يقدر يكلمه ويطبع
+          return BlocProvider(
+            create: (context) => HospitalDetailsCubit(),
+            child: TestResultPdfView(pdfAssetPath: pdfPath),
+          );
+        },
       ),
       GoRoute(
         path: kRequestReportView,

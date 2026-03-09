@@ -18,11 +18,21 @@ const Color kGreyColor = Color(0xFF6C7072);
 const Color kWhiteOpacity20 = Color(0x33FFFFFF);
 // TextField Fill Color:
 const Color kTexrFieldFillColor = Color(0xffc8e0e0);
+// --- ضيف الألوان دي مع الألوان بتاعتك ---
+// Dark Text Color (For titles and main text):
+const Color kDarkTextColor = Color(0xFF1E1E1E);
+// Light Container Color (For icon backgrounds):
+const Color kLightContainerColor = Color(0xFFF5F5F5);
+
+// --- ضيف الـ Radius ده جوه كلاس AppDecorations ---
+  // Border Radius للكروت المتوسطة والصغيرة
+ 
 
 // --- Decorations (Borders & Shadows) ---
 abstract class AppDecorations {
   // Border Radius موحد للكروت الكبيرة
   static final borderRadius25 = BorderRadius.circular(25);
+   static final borderRadius16 = BorderRadius.circular(16);
   
   // Shadow موحد للكروت عشان يدي عمق خفيف
 // Shadow موحد للكروت عشان يدي عمق خفيف

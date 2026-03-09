@@ -2,6 +2,14 @@
 class Assets {
   Assets._();
   
+  /// Assets for imagesBloodTest
+  /// assets/images/blood-test.png
+  static const String imagesBloodTest = "assets/images/blood-test.png";
+
+  /// Assets for imagesDna
+  /// assets/images/dna.png
+  static const String imagesDna = "assets/images/dna.png";
+
   /// Assets for imagesDocCard2
   /// assets/images/doc_card_2.png
   static const String imagesDocCard2 = "assets/images/doc_card_2.png";
