@@ -21,7 +21,7 @@ class LoginSubmitButton extends StatelessWidget {
     return BlocConsumer<PatientAuthCubit, PatientAuthState>(
       listener: (context, state) {
         if (state is PatientAuthSuccess) {
-          GoRouter.of(context).pushReplacement(AppRouter.kPatientHomeView);
+          GoRouter.of(context).pushReplacement(AppRouter.kPatientMainScreen);
         } else if (state is PatientAuthFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medi_cloud_app/Core/utils/app_images.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/constant.dart';
 
@@ -25,7 +26,7 @@ class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
         icon: Icon(
           Icons.arrow_back,
           // لو باعتين لون هنستخدمه، لو لأ هنستخدم اللون الديفولت
-          color: iconColor ?? const Color(0xff363853), 
+          color: iconColor ?? const Color(0xff363853),
           size: 32,
         ),
         // لو باعتين أكشن هنشغله، لو لأ هيعمل pop عادي
@@ -40,22 +41,23 @@ class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   // السطر ده مهم عشان إنت عامل implements PreferredSizeWidget
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight); 
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
-
-
-
 
 class CustomAppBar extends StatelessWidget {
   final String title;
   final Color? iconColor;
-  final Color? textColor; // 1. ضفنا المتغير بتاع لون الكلمة
+  final Color? textColor;
+  final bool showEditIcon; // 1. متغير لتحديد هل تظهر الأيقونة أم لا
+  final VoidCallback? onEditTap;
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.iconColor,
-    this.textColor, // 2. خليناه اختياري
+    this.textColor,
+    this.showEditIcon = false, // 2. القيمة الافتراضية "مخفية"
+    this.onEditTap,
   });
 
   @override
@@ -63,31 +65,47 @@ class CustomAppBar extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
         child: Stack(
           alignment: Alignment.center,
           children: [
+            // زرار الرجوع (Left) - دايماً موجود
             Align(
               alignment: Alignment.centerLeft,
               child: IconButton(
                 icon: Icon(
-                  Icons.arrow_back_ios_new, 
+                  Icons.arrow_back,
+                  // لو باعتين لون هنستخدمه، لو لأ هنستخدم اللون الديفولت
                   color: iconColor ?? const Color(0xff363853),
-                  size: 24,
+                  size: 32,
                 ),
-                onPressed: () {
-                  GoRouter.of(context).pop(); 
-                },
+                onPressed: () => GoRouter.of(context).pop(),
               ),
             ),
-            
+
+            // العنوان (Center)
             Text(
               title,
-              // 3. هنا الـ Logic: لو باعت لون للكلمة استخدمه، لو لأ حط اللون الأخضر الأساسي
               style: Styles.textStyle24Bold.copyWith(
                 color: textColor ?? kPrimaryColor,
               ),
             ),
+
+            // أيقونة التعديل (Right) - تظهر فقط لو showEditIcon بـ true
+            if (showEditIcon)
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: onEditTap ?? () {},
+                  child: Image.asset(
+                    Assets
+                        .imagesEditButton, // الصورة اللي عندك في ملف الـ Assets
+                    height: 29, // اتحكم في الحجم عشان يناسب الـ AppBar
+                    width: 29,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
           ],
         ),
       ),
