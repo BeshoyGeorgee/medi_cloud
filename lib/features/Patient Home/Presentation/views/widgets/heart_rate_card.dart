@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/constant.dart';
 
@@ -62,17 +64,22 @@ class HeartRateCard extends StatelessWidget {
                       ],
                     ),
                     // Navigation Arrow Buttonل
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      // Added 'const' and used the unified constant color for better performance
-                      decoration: const BoxDecoration(
-                        color: kWhiteOpacity20,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                        size: 14,
+                    GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kLiveVitalsView);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        // Added 'const' and used the unified constant color for better performance
+                        decoration: const BoxDecoration(
+                          color: kWhiteOpacity20,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: 14,
+                        ),
                       ),
                     ),
                   ],

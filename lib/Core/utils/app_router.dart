@@ -19,6 +19,7 @@ import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/my_
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/request_report_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/success_hospital_join_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/test_result_pdf_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Live%20Vitals/Presentation/view/live_vitals_view.dart';
 import 'package:medi_cloud_app/features/Role%20Selection/presentation/views/role_selection_view.dart';
 import 'package:medi_cloud_app/features/SplashScreen/presentation/views/SplashView.dart';
 
@@ -42,10 +43,15 @@ abstract class AppRouter {
   static const kMyHospitalDashboardView = '/myHospitalDashboardView';
   static const kRequestReportView = '/requestReportView';
   static const kTestResultPdfView = '/testResultPdfView';
+  static const kLiveVitalsView = '/liveVitalsView';
 
   // التعديل هنا: خليناها router بحرف سمول
   static final router = GoRouter(
     routes: [
+       GoRoute(
+        path: kLiveVitalsView,
+        builder: (context, state) => const LiveVitalsView(),
+      ),
       GoRoute(
         path: kPatientMainScreen,
         builder: (context, state) => const PatientMainScreen(),
