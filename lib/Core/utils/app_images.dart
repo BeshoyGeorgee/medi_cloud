@@ -41,5 +41,9 @@ class Assets {
   /// Assets for imagesSmartWatch
   /// assets/images/Smart_Watch.png
   static const String imagesSmartWatch = "assets/images/Smart_Watch.png";
+
+  /// Assets for pdfsSampleReport
+  /// assets/pdfs/CBC-sample-report-with-notes_0.pdf
+ static const String pdfsSampleReport = "assets/pdfs/CBC-sample-report-with-notes_0.pdf";
 }
 

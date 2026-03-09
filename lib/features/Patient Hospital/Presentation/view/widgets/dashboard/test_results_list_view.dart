@@ -30,10 +30,10 @@ class TestResultsListView extends StatelessWidget {
                 Assets.imagesBloodTest, // Assuming you named it like this
             onTap: () {
               GoRouter.of(context).push(
-                AppRouter
-                    .kTestResultPdfView, // تأكد إن اسم الكلاس AppRouter زي اللي عندك
+                AppRouter.kTestResultPdfView,
                 extra:
-                    'assets/pdfs/sample.pdf', // مسار ملف الـ PDF اللي هنجرب بيه
+                    Assets
+                        .pdfsSampleReport, // استخدمنا المتغير اللي لسه ضايفينه هنا
               );
             },
           );
@@ -48,7 +48,14 @@ class TestResultsListView extends StatelessWidget {
             date: '20/2/2025',
             // Make sure these match the exact variable names in your app_images.dart
             iconAsset: Assets.imagesDna, // Assuming you named it like this
-            onTap: () {},
+            onTap: () {
+                  GoRouter.of(context).push(
+                AppRouter.kTestResultPdfView,
+                extra:
+                    Assets
+                        .pdfsSampleReport, 
+              );
+            },
           );
         }
       },
