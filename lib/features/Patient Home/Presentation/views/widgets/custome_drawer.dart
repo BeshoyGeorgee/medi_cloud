@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:medi_cloud_app/Core/utils/app_images.dart';
-import 'package:medi_cloud_app/Core/utils/textStyles.dart';
-import 'package:medi_cloud_app/constant.dart';
+import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/drawer_footer.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/drawer_header.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/drawer_item.dart';
@@ -39,7 +39,10 @@ class CustomDrawer extends StatelessWidget {
                 drawerItem(
                   icon: Icons.person_outline,
                   title: 'Profile',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                    GoRouter.of(context).push(AppRouter.kPatientProfileView);
+                  },
                 ),
                 drawerItem(
                   imagePath:
