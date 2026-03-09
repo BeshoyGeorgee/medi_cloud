@@ -2,6 +2,14 @@
 class Assets {
   Assets._();
   
+  /// Assets for imagesBloodTest
+  /// assets/images/blood-test.png
+  static const String imagesBloodTest = "assets/images/blood-test.png";
+
+  /// Assets for imagesDna
+  /// assets/images/dna.png
+  static const String imagesDna = "assets/images/dna.png";
+
   /// Assets for imagesDocCard2
   /// assets/images/doc_card_2.png
   static const String imagesDocCard2 = "assets/images/doc_card_2.png";
@@ -50,6 +58,9 @@ class Assets {
   /// assets/images/Smart_Watch.png
   static const String imagesSmartWatch = "assets/images/Smart_Watch.png";
 
+  /// Assets for pdfsSampleReport
+  /// assets/pdfs/CBC-sample-report-with-notes_0.pdf
+ static const String pdfsSampleReport = "assets/pdfs/CBC-sample-report-with-notes_0.pdf";
   /// Assets for imagesUploadFileIcon
   /// assets/images/Upload_file_icon.png
   static const String imagesUploadFileIcon = "assets/images/Upload_file_icon.png";

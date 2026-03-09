@@ -24,6 +24,7 @@ import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/my_
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/request_report_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/success_hospital_join_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/test_result_pdf_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Live%20Vitals/Presentation/view/live_vitals_view.dart';
 import 'package:medi_cloud_app/features/Role%20Selection/presentation/views/role_selection_view.dart';
 import 'package:medi_cloud_app/features/SplashScreen/presentation/views/SplashView.dart';
 
@@ -47,6 +48,7 @@ abstract class AppRouter {
   static const kMyHospitalDashboardView = '/myHospitalDashboardView';
   static const kRequestReportView = '/requestReportView';
   static const kTestResultPdfView = '/testResultPdfView';
+  static const kLiveVitalsView = '/liveVitalsView';
   static const kPatientProfileView = '/patientProfileView';
   static const kInsuranceView = '/insuranceView';
   static const kCardiacTestView = '/cardiacTestView';
@@ -56,6 +58,10 @@ abstract class AppRouter {
   // التعديل هنا: خليناها router بحرف سمول
   static final router = GoRouter(
     routes: [
+       GoRoute(
+        path: kLiveVitalsView,
+        builder: (context, state) => const LiveVitalsView(),
+      ),
       GoRoute(
         path: kPatientMainScreen,
         builder: (context, state) => const PatientMainScreen(),
@@ -66,7 +72,16 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kTestResultPdfView,
-        builder: (context, state) => const TestResultPdfView(),
+        builder: (context, state) {
+          // هنا بنستقبل مسار الـ PDF اللي مبعوت من الشاشة اللي قبلها
+          final pdfPath = state.extra as String;
+
+          // بنغلف الشاشة بالكيوبت عشان الـ Bottom Bar يقدر يكلمه ويطبع
+          return BlocProvider(
+            create: (context) => HospitalDetailsCubit(),
+            child: TestResultPdfView(pdfAssetPath: pdfPath),
+          );
+        },
       ),
       GoRoute(
         path: kRequestReportView,
