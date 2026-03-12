@@ -11,9 +11,11 @@ import 'package:medi_cloud_app/features/Patient%20Doctor/Data/doctor_profile_cub
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/doctor_details_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/explore_doctors_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/success_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/ministry_of_health_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_home_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_insurance_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_profile_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/article_details_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/cardiac_test_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/submit_doctor_syndicate_claim.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/success_claim_screen_view.dart';
@@ -54,11 +56,13 @@ abstract class AppRouter {
   static const kCardiacTestView = '/cardiacTestView';
   static const kSuccessClaimScreenView = '/successClaimScreenView';
   static const kSubmitDoctorSyndicateClaim = '/submitDoctorSyndicateClaim';
+  static const kMinistryOfHealthView = '/ministryOfHealthView';
+  static const kArticleDetailsView = '/articleDetailsView';
 
   // التعديل هنا: خليناها router بحرف سمول
   static final router = GoRouter(
     routes: [
-       GoRoute(
+      GoRoute(
         path: kLiveVitalsView,
         builder: (context, state) => const LiveVitalsView(),
       ),
@@ -193,6 +197,14 @@ abstract class AppRouter {
       GoRoute(
         path: kSubmitDoctorSyndicateClaim,
         builder: (context, state) => const SubmitDoctorSyndicateClaim(),
+      ),
+      GoRoute(
+        path: kMinistryOfHealthView,
+        builder: (context, state) => const MinistryOfHealthView(),
+      ),
+      GoRoute(
+        path: kArticleDetailsView,
+        builder: (context, state) => const ArticleDetailView(),
       ),
     ],
   );

@@ -55,7 +55,9 @@ class CustomDrawer extends StatelessWidget {
                 drawerItem(
                   imagePath: Assets.imagesMinistryOfHealth,
                   title: 'Ministry of Health',
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).push(AppRouter.kMinistryOfHealthView);
+                  },
                 ),
                 drawerItem(
                   imagePath: Assets.imagesWHO,
