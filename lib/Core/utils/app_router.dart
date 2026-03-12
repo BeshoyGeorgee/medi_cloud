@@ -24,7 +24,10 @@ import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/my_
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/request_report_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/success_hospital_join_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/test_result_pdf_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Live%20Vitals/Data/live_vitals_cubit.dart';
 import 'package:medi_cloud_app/features/Patient%20Live%20Vitals/Presentation/view/live_vitals_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Live%20Vitals/Presentation/view/security_pin_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Notifications/Presentation/view/notification_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Reports/presentation/view/health_progress_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Reports/presentation/view/heart_rate_details_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Reports/presentation/view/my_reports_view.dart';
@@ -60,10 +63,26 @@ abstract class AppRouter {
   static const kMyReportsView = '/myReportsView';
   static const kHealthProgressView = '/healthProgressView';
   static const kHeartRateDetailsView = '/heartRateDetailsView';
+  static const kSecurityPinView = '/securityPinView';
+  static const kNotificationView = '/notificationView';
 
   // التعديل هنا: خليناها router بحرف سمول
   static final router = GoRouter(
     routes: [
+      GoRoute(
+        path: AppRouter.kNotificationView,
+        builder: (context, state) => const NotificationView(),
+      ),
+      GoRoute(
+        path: kSecurityPinView,
+        builder: (context, state) {
+          final cubit = state.extra as LiveVitalsCubit;
+          return BlocProvider.value(
+            value: cubit,
+            child: const SecurityPinView(pinCode: '123456'),
+          );
+        },
+      ),
       GoRoute(
         path: kHeartRateDetailsView,
         builder: (context, state) => const HeartRateDetailsView(),
