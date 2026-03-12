@@ -25,6 +25,9 @@ import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/req
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/success_hospital_join_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/test_result_pdf_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Live%20Vitals/Presentation/view/live_vitals_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Reports/presentation/view/health_progress_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Reports/presentation/view/heart_rate_details_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Reports/presentation/view/my_reports_view.dart';
 import 'package:medi_cloud_app/features/Role%20Selection/presentation/views/role_selection_view.dart';
 import 'package:medi_cloud_app/features/SplashScreen/presentation/views/SplashView.dart';
 
@@ -54,11 +57,26 @@ abstract class AppRouter {
   static const kCardiacTestView = '/cardiacTestView';
   static const kSuccessClaimScreenView = '/successClaimScreenView';
   static const kSubmitDoctorSyndicateClaim = '/submitDoctorSyndicateClaim';
+  static const kMyReportsView = '/myReportsView';
+  static const kHealthProgressView = '/healthProgressView';
+  static const kHeartRateDetailsView = '/heartRateDetailsView';
 
   // التعديل هنا: خليناها router بحرف سمول
   static final router = GoRouter(
     routes: [
-       GoRoute(
+      GoRoute(
+        path: kHeartRateDetailsView,
+        builder: (context, state) => const HeartRateDetailsView(),
+      ),
+      GoRoute(
+        path: kHealthProgressView,
+        builder: (context, state) => const HealthProgressView(),
+      ),
+      GoRoute(
+        path: kMyReportsView,
+        builder: (context, state) => const MyReportsView(),
+      ),
+      GoRoute(
         path: kLiveVitalsView,
         builder: (context, state) => const LiveVitalsView(),
       ),
