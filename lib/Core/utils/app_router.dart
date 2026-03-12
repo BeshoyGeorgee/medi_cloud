@@ -11,12 +11,15 @@ import 'package:medi_cloud_app/features/Patient%20Doctor/Data/doctor_profile_cub
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/doctor_details_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/explore_doctors_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Doctor/Presentation/view/success_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/ministry_of_health_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_home_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_insurance_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/patient_profile_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/article_details_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/cardiac_test_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/submit_doctor_syndicate_claim.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/success_claim_screen_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/world_health_organization_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Data/hospital_details_cubit.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/explore_hospital_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/hospital_details_view.dart';
@@ -65,6 +68,9 @@ abstract class AppRouter {
   static const kHeartRateDetailsView = '/heartRateDetailsView';
   static const kSecurityPinView = '/securityPinView';
   static const kNotificationView = '/notificationView';
+  static const kMinistryOfHealthView = '/ministryOfHealthView';
+  static const kArticleDetailsView = '/articleDetailsView';
+  static const kWorldHealthOrganizationView = '/worldHealthOrganizationView';
 
   // التعديل هنا: خليناها router بحرف سمول
   static final router = GoRouter(
@@ -230,6 +236,18 @@ abstract class AppRouter {
       GoRoute(
         path: kSubmitDoctorSyndicateClaim,
         builder: (context, state) => const SubmitDoctorSyndicateClaim(),
+      ),
+      GoRoute(
+        path: kMinistryOfHealthView,
+        builder: (context, state) => const MinistryOfHealthView(),
+      ),
+      GoRoute(
+        path: kArticleDetailsView,
+        builder: (context, state) => const ArticleDetailView(),
+      ),
+      GoRoute(
+        path: kWorldHealthOrganizationView,
+        builder: (context, state) => const WorldHealthOrganizationView(),
       ),
     ],
   );
