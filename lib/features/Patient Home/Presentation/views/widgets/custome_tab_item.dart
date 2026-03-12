@@ -33,12 +33,18 @@ class CustomTabItem extends StatelessWidget {
               Icon(icon, size: 16, color: const Color(0xff4A4459)),
               const SizedBox(width: 4),
             ],
-            Text(
-              text,
-              style: Styles.textStyle16Medium.copyWith(
-                color: const Color(0xff4A4459),
-              ),
-            ),
+            Flexible( 
+      child: Text(
+        text,
+        textAlign: TextAlign.center, // عشان الكلام الطويل يتوسطن
+        maxLines: 1, // لو عايزه في سطر واحد ويصغر
+        overflow: TextOverflow.ellipsis, // لو الكلام زاد أوي يحط نقط ...
+        style: Styles.textStyle16Medium.copyWith(
+          color: const Color(0xff4A4459),
+          fontSize: 16, // صغر الفونت شوية عشان الـ Guidelines طويلة
+        ),
+      ),
+    ),
           ],
         ),
       ),

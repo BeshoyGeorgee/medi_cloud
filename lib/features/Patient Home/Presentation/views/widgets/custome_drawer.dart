@@ -62,7 +62,10 @@ class CustomDrawer extends StatelessWidget {
                 drawerItem(
                   imagePath: Assets.imagesWHO,
                   title: 'World Health Organization',
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context)
+                        .push(AppRouter.kWorldHealthOrganizationView);
+                  },
                 ),
               ],
             ),

@@ -19,6 +19,7 @@ import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widget
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/cardiac_test_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/submit_doctor_syndicate_claim.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/success_claim_screen_view.dart';
+import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/world_health_organization_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Data/hospital_details_cubit.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/explore_hospital_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Hospital/Presentation/view/hospital_details_view.dart';
@@ -58,6 +59,7 @@ abstract class AppRouter {
   static const kSubmitDoctorSyndicateClaim = '/submitDoctorSyndicateClaim';
   static const kMinistryOfHealthView = '/ministryOfHealthView';
   static const kArticleDetailsView = '/articleDetailsView';
+  static const kWorldHealthOrganizationView = '/worldHealthOrganizationView';
 
   // التعديل هنا: خليناها router بحرف سمول
   static final router = GoRouter(
@@ -205,6 +207,10 @@ abstract class AppRouter {
       GoRoute(
         path: kArticleDetailsView,
         builder: (context, state) => const ArticleDetailView(),
+      ),
+      GoRoute(
+        path: kWorldHealthOrganizationView,
+        builder: (context, state) => const WorldHealthOrganizationView(),
       ),
     ],
   );
