@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:medi_cloud_app/Core/utils/widgets/custom_bottom_nav_bar.dart';
 import 'package:medi_cloud_app/constant.dart';
 import 'package:medi_cloud_app/features/Chatbot/Presentation/view/chatbot_view.dart';
-import 'package:medi_cloud_app/features/Patient%20Dashboard/Presentation/view/patient_dashboard_view.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/custome_drawer.dart';
 import 'package:medi_cloud_app/features/Patient%20Home/Presentation/views/widgets/patient_home_view_body.dart';
+import 'package:medi_cloud_app/features/Patient%20Reports/presentation/view/my_reports_view.dart';
+
 
 // Must be Stateful to hold the current index state
 class PatientMainScreen extends StatefulWidget {
@@ -24,7 +25,7 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
   final List<Widget> _screens = [
     const PatientHomeViewBody(), // 0: The beautiful home screen we built
     const ChatbotView(), // 1: Placeholder for Chat
-    const PatientDashboardView(), // 2: Placeholder for Menu
+    const MyReportsView(), // 2: Placeholder for Menu
   ];
 
   @override

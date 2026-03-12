@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medi_cloud_app/Core/utils/app_router.dart';
 import 'package:medi_cloud_app/Core/utils/textStyles.dart';
 import 'package:medi_cloud_app/Core/utils/widgets/patient_main_screen.dart';
 import 'package:medi_cloud_app/constant.dart';
@@ -38,26 +40,31 @@ class CustomHomeAppbar extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        Stack(
-          children: [
-            const Icon(
-              Icons.notifications_none_rounded,
-              size: 32,
-              color: kShadePrimaryColor,
-            ),
-            Positioned(
-              right: 4,
-              top: 2,
-              child: Container(
-                width: 10,
-                height: 10,
-                decoration: const BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle,
+        GestureDetector(
+          onTap: () {
+            GoRouter.of(context).push(AppRouter.kNotificationView);
+          },
+          child: Stack(
+            children: [
+              const Icon(
+                Icons.notifications_none_rounded,
+                size: 32,
+                color: kShadePrimaryColor,
+              ),
+              Positioned(
+                right: 4,
+                top: 2,
+                child: Container(
+                  width: 10,
+                  height: 10,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
